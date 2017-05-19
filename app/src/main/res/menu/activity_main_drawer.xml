@@ -3,47 +3,39 @@
 
 
     <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/nav_home"
+        android:title="Home"
+        />
+
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/nav_about"
+        android:title="About"
+        />
+
+    <item
+        android:id="@+id/nav_store"
+        android:icon="@drawable/nav_store"
+        android:title="Products"
+        />
+
+    <item
+        android:id="@+id/nav_training"
+        android:icon="@drawable/nav_training"
+        android:title="Training"
+        />
+
+    <item
         android:id="@+id/nav_qr"
-        android:icon="@drawable/ic_menu_camera"
-        android:title="QR Reader"
+        android:icon="@drawable/nav_qr"
+        android:title="QR Code"
         />
 
     <item
         android:id="@+id/nav_contact"
-        android:icon="@drawable/ic_menu_share"
+        android:icon="@drawable/nav_contact_new"
         android:title="Contact"
         />
-
-    <!--<group android:checkableBehavior="single">-->
-        <!--<item-->
-            <!--android:id="@+id/nav_camera"-->
-            <!--android:icon="@drawable/ic_menu_camera"-->
-            <!--android:title="Import" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_gallery"-->
-            <!--android:icon="@drawable/ic_menu_gallery"-->
-            <!--android:title="Gallery" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_slideshow"-->
-            <!--android:icon="@drawable/ic_menu_slideshow"-->
-            <!--android:title="Slideshow" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_manage"-->
-            <!--android:icon="@drawable/ic_menu_manage"-->
-            <!--android:title="Tools" />-->
-    <!--</group>-->
-
-    <!--<item android:title="Communicate">-->
-        <!--<menu>-->
-            <!--<item-->
-                <!--android:id="@+id/nav_share"-->
-                <!--android:icon="@drawable/ic_menu_share"-->
-                <!--android:title="Share" />-->
-            <!--<item-->
-                <!--android:id="@+id/nav_send"-->
-                <!--android:icon="@drawable/ic_menu_send"-->
-                <!--android:title="Send" />-->
-        <!--</menu>-->
-    <!--</item>-->
 
 </menu>
