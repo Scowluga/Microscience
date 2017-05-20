@@ -1,0 +1,81 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.scowluga.android.microscience.about.AboutFragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/msc_team"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/marginOut">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Serving the Canadian Special Needs Community since 1980, providing Adaptive technology, Consulting, Training, Service and Support."/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Who Are We?"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We are a company with over 35 years experience in Special Needs. We employ qualified and exceptional staff holding a reputation for providing start to finish service in our service community. We provide the solutions you are looking for. We hold a nationwide network of contacts in the Special Needs field. Staff complements include individuals with Special Needs such as Low Vision, Learning Disabilities and Blindness. These individuals specialize in servicing needs through first hand knowledge of their particular community.
+
+We carry extensive product offerings for Special Needs individuals including those with multiple disabilities and undergoing rehabilitation. A Nationwide distributor of Kurzweil 3000, a program dedicated to ‘bring the printed word to life’TM for those with Special Needs."/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="What Do We Do?"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We tailor-make each system to your personal requirements and personal needs. We provide training on all systems we install as well as technical support. We keep our clients current on all new programs in their specific area of interest.
+
+Keeping up with technology is big at MICROSCIENCE – after all, it is the outstanding client care that we are well known for. We work with your financial situation and help you through the funding process. We will help you to determine what benefits you are entitled to."/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:text="Website"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact Us"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
