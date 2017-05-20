@@ -21,6 +21,7 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
 
     List<Point> pointList;
     Context context;
+    private final View.OnClickListener mOnClickListener = new MyOnClickListener();
 
     public TrainingAdapter (List<Point> points, Context c) {
         this.pointList = points;
@@ -57,27 +58,28 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
         {
             case VIEW_TYPES.Normal:
                 rowView=LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment4_training_row, parent, false);
+                rowView.setOnClickListener(mOnClickListener);
                 break;
             case VIEW_TYPES.Header:
                 rowView=LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment4_training_row_header, parent, false);
                 break;
             case VIEW_TYPES.Footer:
                 rowView=LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment4_training_row_footer, parent, false);
-                Button website = (Button)rowView.findViewById(R.id.training_website);
-                website.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        MainActivity.websiteLaunch(context);
-                    }
-                });
-
-                Button contact = (Button)rowView.findViewById(R.id.training_contact);
-                contact.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        MainActivity.contactLaunch(context);
-                    }
-                });
+//                Button website = (Button)rowView.findViewById(R.id.training_website);
+//                website.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        MainActivity.websiteLaunch(context);
+//                    }
+//                });
+//
+//                Button contact = (Button)rowView.findViewById(R.id.training_contact);
+//                contact.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        MainActivity.contactLaunch(context);
+//                    }
+//                });
                 break;
             default:
                 rowView=LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment4_training_row, parent, false);

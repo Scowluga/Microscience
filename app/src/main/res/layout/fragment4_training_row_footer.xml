@@ -15,7 +15,8 @@
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/left_website"/>
+            android:drawableLeft="@drawable/left_website"
+            android:onClick="websiteLaunch"/>
 
         <Button
             android:id="@+id/training_contact"
@@ -23,7 +24,8 @@
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/left_contact"/>
+            android:drawableLeft="@drawable/left_contact"
+            android:onClick="contactLaunch"/>
 
     </LinearLayout>
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.scowluga.android.microscience;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,12 +19,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
 import com.scowluga.android.microscience.about.AboutFragment;
 import com.scowluga.android.microscience.contact.ContactFragment;
+import com.scowluga.android.microscience.home.HomeFragment;
 import com.scowluga.android.microscience.training.TrainingAdapter;
 import com.scowluga.android.microscience.training.TrainingFragment;
 
@@ -35,8 +38,8 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAGFRAGMENT = "TAGFRAGMENT";
 
-    public DrawerLayout drawer;
-    public Toolbar toolbar;
+    public static DrawerLayout drawer;
+    public static Toolbar toolbar;
 
     // ----------------------------------------------------------------------
     // ------------------ GENERAL LIFE CYCLE FUNCTIONS ----------------------
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity
         setup();
 
         // INITIALIZE HOME
-        Fragment frag = ContactFragment.newInstance();
+        Fragment frag = HomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frag_layout, frag, TAGFRAGMENT)
                 .addToBackStack(TAGFRAGMENT)
@@ -96,13 +99,13 @@ public class MainActivity extends AppCompatActivity
                 setContentView(R.layout.activity_main);
                 setup();
                 Fragment frag = getSupportFragmentManager().findFragmentByTag(TAGFRAGMENT);
-//                if (frag instanceof ContactFragment) {
-//                    Toast.makeText(this, "Wehe", Toast.LENGTH_SHORT).show();
-//                    getSupportFragmentManager().beginTransaction()
-//                            .replace(R.id.frag_layout, ContactFragment.newInstance(), TAGFRAGMENT)
-//                            .addToBackStack(TAGFRAGMENT)
-//                            .commit();
-//                }
+                if (frag instanceof ContactFragment) {
+                    Toast.makeText(this, "Wehe", Toast.LENGTH_SHORT).show();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frag_layout, ContactFragment.newInstance(), TAGFRAGMENT)
+                            .addToBackStack(TAGFRAGMENT)
+                            .commit();
+                }
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frag_layout, frag, TAGFRAGMENT)
                         .addToBackStack(TAGFRAGMENT)
@@ -140,6 +143,11 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_home) {
+            Fragment frag = HomeFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frag_layout, frag, TAGFRAGMENT)
+                    .addToBackStack(TAGFRAGMENT)
+                    .commit();
 
         } else if (id == R.id.nav_about) {
             Fragment frag = AboutFragment.newInstance();
@@ -182,16 +190,33 @@ public class MainActivity extends AppCompatActivity
     // ------------------ GENERAL ACCESS FUNCTIONS --------------------------
     // ----------------------------------------------------------------------
 
-    public static void websiteLaunch(Context c ) {
+    public static void websiteLaunch(View view) {
         String uri = "https://microscience.on.ca/";
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        c.startActivity(intent);
+        view.getContext().startActivity(intent);
     }
 
-    public static void contactLaunch(Context c ) {
+    public static void contactLaunch(View view) {
         String uri = "https://microscience.on.ca/contact-us/";
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        c.startActivity(intent);
+        view.getContext().startActivity(intent);
+    }
+
+    public static void rateLaunch(View view) {
+        Context c = view.getContext();
+        Uri uri = Uri.parse("market://details?id=" + c.getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        // To count with Play market backstack, After pressing back button,
+        // to taken back to our application, we need to add following flags to intent.
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            c.startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            c.startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + c.getPackageName())));
+        }
     }
 
     // ----------------------------------------------------------------------
@@ -210,11 +235,8 @@ public class MainActivity extends AppCompatActivity
 //        alert.show();
 
         if (URLUtil.isValidUrl(result.getText())) { // if it's a url. go to
-
-
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(result.getText()));
             startActivity(intent);
-            onBackPressed();
         }
         // Toast.makeText(getApplicationContext(), result.getText(), Toast.LENGTH_SHORT).show();
         zXingScannerView.resumeCameraPreview(this);

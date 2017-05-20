@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.about;
+package com.scowluga.android.microscience.home;
 
 
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.scowluga.android.microscience.MainActivity;
 import com.scowluga.android.microscience.R;
@@ -14,18 +13,18 @@ import com.scowluga.android.microscience.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AboutFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
 
-    public AboutFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
-    public static AboutFragment newInstance() {
-
+    public static HomeFragment newInstance() {
+        
         Bundle args = new Bundle();
-
-        AboutFragment fragment = new AboutFragment();
+        
+        HomeFragment fragment = new HomeFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -35,7 +34,7 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment2_about, container, false);
+        View v = inflater.inflate(R.layout.fragment1_home, container, false);
 
 
 
@@ -44,8 +43,7 @@ public class AboutFragment extends Fragment {
 
     @Override
     public void onResume() {
-        MainActivity.toolbar.setTitle("About");
+        MainActivity.toolbar.setTitle("Home"); 
         super.onResume();
     }
-
 }

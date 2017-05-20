@@ -1,7 +1,9 @@
 package com.scowluga.android.microscience.contact;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -112,9 +114,15 @@ public class ContactFragment extends Fragment {
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uri = "https://www.facebook.com/Microcomputer-Science-Centre-Inc-121036582902/";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                startActivity(intent);
+
+                Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+                String facebookUrl = getFacebookPageURL(getContext());
+                facebookIntent.setData(Uri.parse(facebookUrl));
+                startActivity(facebookIntent);
+
+//                String uri = "https://www.facebook.com/Microcomputer-Science-Centre-Inc-121036582902/";
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                startActivity(intent);
             }
         });
 
@@ -137,18 +145,31 @@ public class ContactFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        // --------------------- Contact Button ------------------------
-
-        Button contact = (Button)v.findViewById(R.id.contact_contact);
-        contact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.contactLaunch(getContext());
-            }
-        });
-
         return v;
     }
 
+    @Override
+    public void onResume() {
+        MainActivity.toolbar.setTitle("Contact");
+        super.onResume();
+    }
+
+    // ------------------ FOR OPENING FACEBOOK IN APP -------------------------
+    public static String FACEBOOK_URL = "https://www.facebook.com/Microcomputer-Science-Centre-Inc-121036582902/";
+    public static String FACEBOOK_PAGE_ID = "Microcomputer-Science-Centre-Inc-121036582902";
+
+    //method to get the right URL to use in the intent
+    public String getFacebookPageURL(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { //newer versions of fb app
+                return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+            } else { //older versions of fb app
+                return "fb://page/" + FACEBOOK_PAGE_ID;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return FACEBOOK_URL; //normal web url
+        }
+    }
 }

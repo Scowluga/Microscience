@@ -246,7 +246,8 @@
             android:text="Or Contact Us Here"
             android:drawableLeft="@drawable/left_contact"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:onClick="contactLaunch"/>
 
     </LinearLayout>
 </FrameLayout>

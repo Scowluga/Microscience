@@ -1,0 +1,84 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.scowluga.android.microscience.home.HomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/msc_training"
+                android:adjustViewBounds="true"/>
+            <!--SOON TO BE SLIDESHOW-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/marginOut">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Who Are We?"
+                    style="@style/titleText"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Since 1980, MSC has been dedicated to enhancing the lives of Special Needs clients. Our firm has introduced many innovative applications into Canada, including Kurzweil 3000 and Dragon Naturally Speaking among others, and has pioneered the use of these packages in the classroom. We are the only firm in southern Ontario that provides assistive technology solutions for the full range of disability profiles. Whether it be a visual impairment or physical challenge, or a learning or intellectual challenge, we can provide the means necessary to accommodate students, and facilitate their learning. We believe in providing our clients with the best solutions, the best support, at affordable prices."
+                    style="@style/smallText"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/home_website"
+                        android:text="Website"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/left_website"
+                        android:onClick="websiteLaunch"/>
+
+                    <Button
+                        android:id="@+id/home_contact"
+                        android:text="Contact Us"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/left_contact"
+                        android:onClick="contactLaunch"/>
+
+                    <Button
+                        android:id="@+id/home_rate"
+                        android:text="Rate"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/left_rate"
+                        android:onClick="rateLaunch" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
