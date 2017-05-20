@@ -5,8 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.scowluga.android.microscience.MainActivity;
@@ -21,14 +24,13 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
 
     List<Point> pointList;
     Context context;
-    private final View.OnClickListener mOnClickListener = new MyOnClickListener();
 
     public TrainingAdapter (List<Point> points, Context c) {
         this.pointList = points;
         this.context = c;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public ImageView iconImage;
@@ -37,13 +39,29 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, boolean isNormal) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
-            iconImage = (ImageView) itemView.findViewById(R.id.training_icon);
-            titleText = (TextView) itemView.findViewById(R.id.training_title);
-            infoText = (TextView) itemView.findViewById(R.id.training_info);
+            if (isNormal) {
+                iconImage = (ImageView) itemView.findViewById(R.id.training_icon);
+                titleText = (TextView) itemView.findViewById(R.id.training_title);
+                infoText = (TextView) itemView.findViewById(R.id.training_info);
+
+                itemView.setOnClickListener(this);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            LinearLayout l = (LinearLayout) v.findViewById(R.id.training_hidden);
+            if (l.getVisibility() == View.GONE) {
+//                l.setVisibility(View.VISIBLE);
+                expand(l);
+            } else if (l.getVisibility() == View.VISIBLE) {
+//                l.setVisibility(View.GONE);
+                collapse(l);
+            }
         }
     }
 
@@ -54,38 +72,20 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
 
         // Inflate the custom layout
         View rowView;
-        switch (viewType)
-        {
+        switch (viewType) {
             case VIEW_TYPES.Normal:
-                rowView=LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment4_training_row, parent, false);
-                rowView.setOnClickListener(mOnClickListener);
-                break;
+                rowView = inflater.inflate(R.layout.fragment4_training_row, parent, false);
+                return new ViewHolder (rowView, true);
             case VIEW_TYPES.Header:
-                rowView=LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment4_training_row_header, parent, false);
-                break;
+                rowView = inflater.inflate(R.layout.fragment4_training_row_header, parent, false);
+                return new ViewHolder (rowView, false);
             case VIEW_TYPES.Footer:
-                rowView=LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment4_training_row_footer, parent, false);
-//                Button website = (Button)rowView.findViewById(R.id.training_website);
-//                website.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        MainActivity.websiteLaunch(context);
-//                    }
-//                });
-//
-//                Button contact = (Button)rowView.findViewById(R.id.training_contact);
-//                contact.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        MainActivity.contactLaunch(context);
-//                    }
-//                });
-                break;
+                rowView = inflater.inflate(R.layout.fragment4_training_row_footer, parent, false);
+                return new ViewHolder (rowView, false);
             default:
-                rowView=LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment4_training_row, parent, false);
-                break;
+                rowView = inflater.inflate(R.layout.fragment4_training_row, parent, false);
+                return new ViewHolder (rowView, true);
         }
-        return new ViewHolder (rowView);
     }
 
     @Override
@@ -120,5 +120,59 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
             return VIEW_TYPES.Footer;
         else
             return VIEW_TYPES.Normal;
+    }
+
+
+
+    public static void expand(final View v) {
+        v.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final int targetHeight = v.getMeasuredHeight();
+
+        // Older versions of android (pre API 21) cancel animations for views with a height of 0.
+        v.getLayoutParams().height = 1;
+        v.setVisibility(View.VISIBLE);
+        Animation a = new Animation() {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                v.getLayoutParams().height = interpolatedTime == 1
+                        ? ViewGroup.LayoutParams.WRAP_CONTENT
+                        : (int) (targetHeight * interpolatedTime);
+                v.requestLayout();
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+        // 1dp/ms
+        a.setDuration((int) (targetHeight / v.getContext().getResources().getDisplayMetrics().density));
+        v.startAnimation(a);
+    }
+
+    public static void collapse(final View v) {
+        final int initialHeight = v.getMeasuredHeight();
+
+        Animation a = new Animation() {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                if (interpolatedTime == 1) {
+                    v.setVisibility(View.GONE);
+                } else {
+                    v.getLayoutParams().height = initialHeight - (int) (initialHeight * interpolatedTime);
+                    v.requestLayout();
+                }
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+        // 1dp/ms
+        a.setDuration((int) (initialHeight / v.getContext().getResources().getDisplayMetrics().density));
+        v.startAnimation(a);
     }
 }

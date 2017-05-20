@@ -3,252 +3,273 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.scowluga.android.microscience.contact.ContactFragment"
-    style="@style/LayoutMargins"
     >
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/marginOut">
+        android:layout_marginTop="?attr/actionBarSize">
 
-
-        <!--Phone -->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/black"
-                android:layout_marginRight="@dimen/contact_margin">
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="2dp"
-                    android:background="@color/background">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="15dp"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/icon_phone"/>
-
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contact By Phone"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Toll Free: "/>
-                    <Button
-                        android:id="@+id/contact_phone_tollfree"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1 (800) 290-6563"
-                        style="@style/linkButton"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Local: "/>
-                    <Button
-                        android:id="@+id/contact_phone_local"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="(905) 629-1654"
-                        style="@style/linkButton"/>
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <!--EMAIL-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/black"
-                android:layout_marginRight="@dimen/contact_margin">
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="2dp"
-                    android:background="@color/background">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="15dp"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/icon_email"/>
-
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contact By Email"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sales: "/>
-                    <Button
-                        android:id="@+id/contact_email_sales"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="sales@microscience.on.ca"
-                        style="@style/linkButton"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Support: "/>
-                    <Button
-                        android:id="@+id/contact_email_support"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="support@microscience.on.ca"
-                        style="@style/linkButton"/>
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <!--LOCATION -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/black"
-                android:layout_marginRight="@dimen/contact_margin">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="2dp"
-                    android:background="@color/background">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="15dp"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/icon_maps"/>
-
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="We're located at..."/>
-
-                <Button
-                    android:id="@+id/contact_location_maps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:text="Unit #26, 5155 Spectrum Way\nMississauga, Ontario L4W 5A1"
-                    style="@style/linkButton"/>
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             >
 
-            <ImageButton
-                android:id="@+id/contact_facebook"
-                android:src="@drawable/social_facebook"
-                style="@style/socialButton"
-            />
-            <ImageButton
-                android:id="@+id/contact_twitter"
-                android:src="@drawable/social_twitter"
-                style="@style/socialButton"
-                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/msc_header"/>
 
-            <ImageButton
-                android:id="@+id/contact_google"
-                android:src="@drawable/social_google"
-                style="@style/socialButton"
-                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/marginOut"
+                android:orientation="vertical">
+
+                <!--Phone -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="@dimen/contact_icon_size"
+                        android:layout_height="@dimen/contact_icon_size"
+                        android:backgroundTint="@color/black"
+                        android:layout_marginRight="@dimen/contact_margin">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="2dp"
+                            android:background="@color/background">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="15dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/icon_phone"/>
+
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/mediumText"
+                            android:textStyle="bold"
+                            android:text="Contact By Phone"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Toll Free: "
+                                style="@style/infoText"/>
+                            <Button
+                                android:id="@+id/contact_phone_tollfree"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1 (800) 290-6563"
+                                style="@style/linkButton"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Local: "
+                                style="@style/infoText"/>
+                            <Button
+                                android:id="@+id/contact_phone_local"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(905) 629-1654"
+                                style="@style/linkButton"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--EMAIL-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="@dimen/contact_icon_size"
+                        android:layout_height="@dimen/contact_icon_size"
+                        android:backgroundTint="@color/black"
+                        android:layout_marginRight="@dimen/contact_margin">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="2dp"
+                            android:background="@color/background">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="15dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/icon_email"/>
+
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/mediumText"
+                            android:textStyle="bold"
+                            android:text="Contact By Email"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/infoText"
+                                android:text="Sales: "/>
+                            <Button
+                                android:id="@+id/contact_email_sales"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="sales@microscience.on.ca"
+                                style="@style/linkButton"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Support: "
+                                style="@style/infoText"/>
+                            <Button
+                                android:id="@+id/contact_email_support"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="support@microscience.on.ca"
+                                style="@style/linkButton"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--LOCATION -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="@dimen/contact_icon_size"
+                        android:layout_height="@dimen/contact_icon_size"
+                        android:backgroundTint="@color/black"
+                        android:layout_marginRight="@dimen/contact_margin">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="2dp"
+                            android:background="@color/background">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="15dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/icon_maps"/>
+
+                        </RelativeLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/mediumText"
+                            android:textStyle="bold"
+                            android:text="We're located at..."/>
+
+                        <Button
+                            android:id="@+id/contact_location_maps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="Unit #26, 5155 Spectrum Way\nMississauga, Ontario L4W 5A1"
+                            style="@style/linkButton"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    >
+
+                    <ImageButton
+                        android:id="@+id/contact_facebook"
+                        android:src="@drawable/social_facebook"
+                        style="@style/socialButton"
+                    />
+                    <ImageButton
+                        android:id="@+id/contact_twitter"
+                        android:src="@drawable/social_twitter"
+                        style="@style/socialButton"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/contact_google"
+                        android:src="@drawable/social_google"
+                        style="@style/socialButton"
+                        />
+                </LinearLayout>
+
+                <include
+                    layout="@layout/fragment0_contact_footer"/>
+
+            </LinearLayout>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/contact_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Or Contact Us Here"
-            android:drawableLeft="@drawable/left_contact"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_gravity="center"
-            android:onClick="contactLaunch"/>
-
-    </LinearLayout>
+    </ScrollView>
 </FrameLayout>
 

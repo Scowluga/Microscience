@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@mipmap/msclauncher"
+            android:adjustViewBounds="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/mediumText"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:text="Microcomputer Science Centre Inc. "/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/small_margin_text"
+        android:text="Serving the North American Special Needs Community since 1980, providing adaptive technology, consulting, training, service and support."/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/home_website"
+            android:text="Website"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/left_website"
+            android:onClick="websiteLaunch"/>
+
+        <Button
+            android:id="@+id/home_contact"
+            android:text="Contact Us"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/left_contact"
+            android:onClick="contactLaunch"/>
+
+        <Button
+            android:id="@+id/home_rate"
+            android:text="Rate"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/left_rate"
+            android:onClick="rateLaunch" />
+
+    </LinearLayout>
+
+</LinearLayout>

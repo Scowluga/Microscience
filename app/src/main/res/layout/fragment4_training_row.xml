@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:clickable="true">
 
     <android.support.v7.widget.CardView
         android:layout_width="60dp"
@@ -50,7 +51,7 @@
             android:visibility="gone">
             <TextView
                 android:id="@+id/training_info"
-                style="@style/smallText"
+                style="@style/small_margin_text"
                 android:text="For adults, accessing the workplace with a disability can be a challenge. While Assistive Technology can level the playing field, training can give an employee an extra edge in achieving success in the workplace. At MSC we feel training is essential to perform at your full potential. Please be aware that our trainers will come to your office and work with you to acquire the skills necessary to be an independent and productive member of society."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

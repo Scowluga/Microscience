@@ -44,13 +44,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/smallText"
+                    style="@style/small_margin_text"
                     android:text="We are a company with over 35 years experience in Special Needs. We employ qualified and exceptional staff holding a reputation for providing start to finish service in our service community. We provide the solutions you are looking for. We hold a nationwide network of contacts in the Special Needs field. Staff complements include individuals with Special Needs such as Low Vision, Learning Disabilities and Blindness. These individuals specialize in servicing needs through first hand knowledge of their particular community."/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/smallText"
+                    style="@style/small_margin_text"
                     android:text="We carry extensive product offerings for Special Needs individuals including those with multiple disabilities and undergoing rehabilitation. A Nationwide distributor of Kurzweil 3000, a program dedicated to ‘bring the printed word to life’TM for those with Special Needs."/>
 
 
@@ -63,40 +63,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/smallText"
+                    style="@style/small_margin_text"
                     android:text="We tailor-make each system to your personal requirements and personal needs. We provide training on all systems we install as well as technical support. We keep our clients current on all new programs in their specific area of interest."/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/smallText"
+                    style="@style/small_margin_text"
                     android:text="Keeping up with technology is big at MICROSCIENCE – after all, it is the outstanding client care that we are well known for. We work with your financial situation and help you through the funding process. We will help you to determine what benefits you are entitled to."/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                <include
+                    layout="@layout/fragment0_contact_footer"/>
 
-                    <Button
-                        android:id="@+id/about_website"
-                        android:text="Website"
-                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/left_website"
-                        android:onClick="websiteLaunch"/>
-
-                    <Button
-                        android:id="@+id/about_contact"
-                        android:text="Contact Us"
-                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/left_contact"
-                        android:onClick="contactLaunch"/>
-
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

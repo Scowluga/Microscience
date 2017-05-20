@@ -26,7 +26,6 @@ import java.util.List;
  */
 public class TrainingFragment extends Fragment {
 
-
     public TrainingFragment() {
         // Required empty public constructor
     }
@@ -40,8 +39,9 @@ public class TrainingFragment extends Fragment {
         return fragment;
     }
 
-
     List<Point> points;
+    public static RecyclerView recyclerView;
+    public static TrainingAdapter trainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,10 +55,11 @@ public class TrainingFragment extends Fragment {
 
         points = Point.initialize();
 
-        RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.training_recycler);
-        TrainingAdapter trainer = new TrainingAdapter(points, getContext());
+        recyclerView = (RecyclerView)v.findViewById(R.id.training_recycler);
+        trainer = new TrainingAdapter(points, getContext());
         recyclerView.setAdapter(trainer);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(llm);
 
         return v;
     }

@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        style="@style/infoText"
+        android:text="Microcomputer Science Centre also offers setup with Teamviewer for remote assistance, and QuickJoin for Webinar access."/>
 
-        <Button
-            android:id="@+id/training_website"
-            android:text="Website"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/left_website"
-            android:onClick="websiteLaunch"/>
+    <Button
+        android:id="@+id/training_remote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+        android:text="Learn More"
+        android:drawableLeft="@drawable/left_person_plus"/>
 
-        <Button
-            android:id="@+id/training_contact"
-            android:text="Contact Us"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/left_contact"
-            android:onClick="contactLaunch"/>
-
-    </LinearLayout>
+    <include
+        layout="@layout/fragment0_contact_footer"/>
 </LinearLayout>

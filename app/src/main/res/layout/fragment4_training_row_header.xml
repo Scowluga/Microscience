@@ -10,10 +10,11 @@
         android:src="@drawable/msc_training"/>
 
     <TextView
+        style="@style/small_margin_text"
+        android:layout_margin="@dimen/marginOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        style="@style/smallText"
         android:text="Microcomputer Science Center offers training to their clientele to ensure they achieve the maximum benefits of the software and technologies they purchase. Microscience has many great training options available. Our staff can train at your office, at your school or in the comfort of your own home. They can provide one-on-one training, group training at your site or in our technology lab. We also offer distance training via the Internet."/>
+
 
 </LinearLayout>
