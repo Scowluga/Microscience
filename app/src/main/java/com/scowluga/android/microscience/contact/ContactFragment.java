@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.scowluga.android.microscience.MainActivity;
 import com.scowluga.android.microscience.R;
 
 /**
@@ -143,9 +144,7 @@ public class ContactFragment extends Fragment {
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uri = "https://microscience.on.ca/contact-us/";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                startActivity(intent);
+                MainActivity.contactLaunch(getContext());
             }
         });
 

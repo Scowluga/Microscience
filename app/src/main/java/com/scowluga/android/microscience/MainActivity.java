@@ -1,6 +1,7 @@
 package com.scowluga.android.microscience;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,7 +14,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -22,7 +22,10 @@ import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
+import com.scowluga.android.microscience.about.AboutFragment;
 import com.scowluga.android.microscience.contact.ContactFragment;
+import com.scowluga.android.microscience.training.TrainingAdapter;
+import com.scowluga.android.microscience.training.TrainingFragment;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -35,6 +38,9 @@ public class MainActivity extends AppCompatActivity
     public DrawerLayout drawer;
     public Toolbar toolbar;
 
+    // ----------------------------------------------------------------------
+    // ------------------ GENERAL LIFE CYCLE FUNCTIONS ----------------------
+    // ----------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +70,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    // ----------------------------------------------------------------------
-    // ------------------ GENERAL LIFE CYCLE FUNCTIONS ----------------------
-    // ----------------------------------------------------------------------
 
     @Override
     protected void onPause() {
@@ -136,8 +139,23 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        if (id == R.id.nav_home) {
 
-        if (id == R.id.nav_qr) {
+        } else if (id == R.id.nav_about) {
+            Fragment frag = AboutFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frag_layout, frag, TAGFRAGMENT)
+                    .addToBackStack(TAGFRAGMENT)
+                    .commit();
+        } else if (id == R.id.nav_products) {
+
+        } else if (id == R.id.nav_training) {
+            Fragment frag = TrainingFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frag_layout, frag, TAGFRAGMENT)
+                    .addToBackStack(TAGFRAGMENT)
+                    .commit();
+        } else if (id == R.id.nav_qr) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED) { // NOT GRANTED
@@ -160,6 +178,21 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    // ----------------------------------------------------------------------
+    // ------------------ GENERAL ACCESS FUNCTIONS --------------------------
+    // ----------------------------------------------------------------------
+
+    public static void websiteLaunch(Context c ) {
+        String uri = "https://microscience.on.ca/";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        c.startActivity(intent);
+    }
+
+    public static void contactLaunch(Context c ) {
+        String uri = "https://microscience.on.ca/contact-us/";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        c.startActivity(intent);
+    }
 
     // ----------------------------------------------------------------------
     // ------------------ QR CODE SCANNER FUNCTIONS -------------------------

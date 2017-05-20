@@ -7,7 +7,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/msc_team"
                 android:adjustViewBounds="true"
-                android:scaleType="fitCenter"/>
+                android:scaleType="fitCenter" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,33 +31,46 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/mediumText"
                     android:text="Serving the Canadian Special Needs Community since 1980, providing Adaptive technology, Consulting, Training, Service and Support."/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/headerText"
                     android:text="Who Are We?"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="We are a company with over 35 years experience in Special Needs. We employ qualified and exceptional staff holding a reputation for providing start to finish service in our service community. We provide the solutions you are looking for. We hold a nationwide network of contacts in the Special Needs field. Staff complements include individuals with Special Needs such as Low Vision, Learning Disabilities and Blindness. These individuals specialize in servicing needs through first hand knowledge of their particular community.
+                    style="@style/smallText"
+                    android:text="We are a company with over 35 years experience in Special Needs. We employ qualified and exceptional staff holding a reputation for providing start to finish service in our service community. We provide the solutions you are looking for. We hold a nationwide network of contacts in the Special Needs field. Staff complements include individuals with Special Needs such as Low Vision, Learning Disabilities and Blindness. These individuals specialize in servicing needs through first hand knowledge of their particular community."/>
 
-We carry extensive product offerings for Special Needs individuals including those with multiple disabilities and undergoing rehabilitation. A Nationwide distributor of Kurzweil 3000, a program dedicated to ‘bring the printed word to life’TM for those with Special Needs."/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/smallText"
+                    android:text="We carry extensive product offerings for Special Needs individuals including those with multiple disabilities and undergoing rehabilitation. A Nationwide distributor of Kurzweil 3000, a program dedicated to ‘bring the printed word to life’TM for those with Special Needs."/>
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/headerText"
                     android:text="What Do We Do?"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="We tailor-make each system to your personal requirements and personal needs. We provide training on all systems we install as well as technical support. We keep our clients current on all new programs in their specific area of interest.
+                    style="@style/smallText"
+                    android:text="We tailor-make each system to your personal requirements and personal needs. We provide training on all systems we install as well as technical support. We keep our clients current on all new programs in their specific area of interest."/>
 
-Keeping up with technology is big at MICROSCIENCE – after all, it is the outstanding client care that we are well known for. We work with your financial situation and help you through the funding process. We will help you to determine what benefits you are entitled to."/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/smallText"
+                    android:text="Keeping up with technology is big at MICROSCIENCE – after all, it is the outstanding client care that we are well known for. We work with your financial situation and help you through the funding process. We will help you to determine what benefits you are entitled to."/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -65,14 +79,20 @@ Keeping up with technology is big at MICROSCIENCE – after all, it is the outst
                     android:gravity="center">
 
                     <Button
+                        android:id="@+id/about_website"
                         android:text="Website"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <Button
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Contact Us"/>
+                        android:drawableLeft="@drawable/left_website"/>
+
+                    <Button
+                        android:id="@+id/about_contact"
+                        android:text="Contact Us"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/left_contact"/>
 
                 </LinearLayout>
             </LinearLayout>
