@@ -2,12 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.scowluga.android.microscience.products.ProductFragment">
+    tools:context="com.scowluga.android.microscience.products.ProductFragment"
+    style="@style/LayoutMargins">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/marginOut">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We haven't got here yet chill Wordpress will be annoying but let us see ;) "
+            android:layout_marginBottom="20dp"
+            style="@style/mediumText"/>
+
+        <include
+            layout="@layout/fragment0_contact_footer"/>
+    </LinearLayout>
 
 </FrameLayout>
