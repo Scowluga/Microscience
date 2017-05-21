@@ -2,40 +2,51 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item
-        android:id="@+id/nav_home"
-        android:icon="@drawable/nav_home"
-        android:title="Home"
-        />
+    <item android:title="General">
+        <menu>
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/nav_home"
+                android:title="Home"
+                />
 
-    <item
-        android:id="@+id/nav_about"
-        android:icon="@drawable/nav_about"
-        android:title="About"
-        />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/nav_about"
+                android:title="About"
+                />
+        </menu>
+    </item>
 
-    <item
-        android:id="@+id/nav_products"
-        android:icon="@drawable/nav_products"
-        android:title="Products"
-        />
 
-    <item
-        android:id="@+id/nav_training"
-        android:icon="@drawable/nav_training"
-        android:title="Training"
-        />
+    <item android:title="Service">
+        <menu>
+            <item
+                android:id="@+id/nav_products"
+                android:icon="@drawable/nav_products"
+                android:title="Products"
+                />
 
-    <item
-        android:id="@+id/nav_qr"
-        android:icon="@drawable/nav_qr"
-        android:title="QR Code"
-        />
+            <item
+                android:id="@+id/nav_training"
+                android:icon="@drawable/nav_training"
+                android:title="Training"
+                />
+            <item
+                android:id="@+id/nav_qr"
+                android:icon="@drawable/nav_qr"
+                android:title="QR Code"
+                />
+        </menu>
+    </item>
 
-    <item
-        android:id="@+id/nav_contact"
-        android:icon="@drawable/nav_contact_new"
-        android:title="Contact"
-        />
-
+    <item android:title="Other">
+        <menu>
+                <item
+                    android:id="@+id/nav_contact"
+                    android:icon="@drawable/nav_contact_new"
+                    android:title="Contact"
+                    />
+        </menu>
+    </item>
 </menu>
