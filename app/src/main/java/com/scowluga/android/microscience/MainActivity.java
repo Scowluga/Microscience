@@ -200,6 +200,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public static void remoteLaunch(View view) {
+        String uri = "https://microscience.on.ca/remote-assistance-webinar/";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        view.getContext().startActivity(intent);
+    }
+
     // ----------------------------------------------------------------------
     // ------------------ QR CODE SCANNER FUNCTIONS -------------------------
     // ----------------------------------------------------------------------

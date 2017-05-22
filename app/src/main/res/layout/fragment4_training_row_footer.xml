@@ -17,6 +17,7 @@
         android:layout_gravity="center"
         style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
         android:text="Learn More"
+        android:onClick="remoteLaunch"
         android:drawableLeft="@drawable/left_person_plus"/>
 
     <include
