@@ -27,6 +27,7 @@ import com.google.zxing.Result;
 import com.scowluga.android.microscience.about.AboutFragment;
 import com.scowluga.android.microscience.contact.ContactFragment;
 import com.scowluga.android.microscience.home.HomeFragment;
+import com.scowluga.android.microscience.news.NewsFragment;
 import com.scowluga.android.microscience.products.ProductFragment;
 import com.scowluga.android.microscience.qr.QrActivity;
 import com.scowluga.android.microscience.training.TrainingAdapter;
@@ -128,6 +129,12 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_about) {
             Fragment frag = AboutFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frag_layout, frag, TAGFRAGMENT)
+                    .addToBackStack(TAGFRAGMENT)
+                    .commit();
+        } else if (id == R.id.nav_news) {
+            Fragment frag = NewsFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frag_layout, frag, TAGFRAGMENT)
                     .addToBackStack(TAGFRAGMENT)
