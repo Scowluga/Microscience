@@ -20,28 +20,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.URLUtil;
 import android.widget.Toast;
 
-import com.google.zxing.Result;
 import com.scowluga.android.microscience.about.AboutFragment;
 import com.scowluga.android.microscience.contact.ContactFragment;
 import com.scowluga.android.microscience.home.HomeFragment;
 import com.scowluga.android.microscience.news.NewsFragment;
 import com.scowluga.android.microscience.products.ProductFragment;
 import com.scowluga.android.microscience.qr.QrActivity;
-import com.scowluga.android.microscience.training.TrainingAdapter;
 import com.scowluga.android.microscience.training.TrainingFragment;
-
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAGFRAGMENT = "TAGFRAGMENT";
+    public static final String TAGFRAGMENT = "TAGFRAGMENT";
+    public static final String NEWS_FILENAME = "news.txt";
 
     public static DrawerLayout drawer;
     public static Toolbar toolbar;
+    public static MenuItem action_refresh;
 
     // ----------------------------------------------------------------------
     // ------------------ GENERAL LIFE CYCLE FUNCTIONS ----------------------
@@ -98,6 +95,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        action_refresh = menu.findItem(R.id.action_refresh);
         return true;
     }
 
@@ -108,11 +106,13 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_refresh) {
+            Fragment f = getSupportFragmentManager().findFragmentByTag(TAGFRAGMENT);
+            if (f instanceof NewsFragment) { // IF NEWS FRAGMENT IS RUNNING ON UPDATE
+                ((NewsFragment) f).refreshStorage();
+            }
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -2,6 +2,7 @@ package com.scowluga.android.microscience.qr;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.URLUtil;
@@ -46,16 +47,17 @@ public class QrActivity extends AppCompatActivity implements ZXingScannerView.Re
 
     @Override
     public void handleResult(Result result) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("QR Scanning Results");
-//        builder.setMessage(result.getText());
-//        AlertDialog alert = builder.create();
-//        alert.show();
 
         if (URLUtil.isValidUrl(result.getText())) { // if it's a url. go to
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(result.getText()));
             startActivity(intent);
             finish();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("QR Scanning Results");
+            builder.setMessage(result.getText());
+            AlertDialog alert = builder.create();
+            alert.show();
         }
         zXingScannerView.resumeCameraPreview(this);
     }

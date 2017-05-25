@@ -3,6 +3,7 @@ package com.scowluga.android.microscience.news;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class NewsFragment extends Fragment {
     }
 
     List<Post> postList;
+    public static final String fetchURL = "https://microscience.on.ca/wp-json/wp/v2/posts?fields=title,content";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +45,16 @@ public class NewsFragment extends Fragment {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment3_news, container, false);
 
-        String fetchURL = "https://microscience.on.ca/wp-json/wp/v2/posts?fields=title,content";
+        // Swipe Refresh Layout
+        SwipeRefreshLayout sl = (SwipeRefreshLayout)v.findViewById(R.id.news_swipe_refresh);
+        sl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshStorage();
+            }
+        });
+
+        // Getting Data
         DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(getActivity(), fetchURL, new DataFetchAsyncTask.AsyncResponse(){
             @Override
             public void processFinish(String output){
@@ -60,10 +71,19 @@ public class NewsFragment extends Fragment {
         return v;
     }
 
-    private List<Post> parseNews(String output) {
-        List<Post> info = new ArrayList<>();
+    public void refreshStorage() {
+        Toast.makeText(getContext(), "refreshing", Toast.LENGTH_SHORT).show();
 
-        try{
+        // Read data
+        // if different, reset
+        // Refresh
+    }
+
+
+
+    public static List<Post> parseNews(String output) {
+        List<Post> info = new ArrayList<>();
+        try {
             JSONObject jsonResponse = new JSONObject(output);
             JSONArray jsonMainNode = jsonResponse.optJSONArray("posts");
             int postCount = Integer.parseInt(jsonResponse.getString("count"));
@@ -80,20 +100,22 @@ public class NewsFragment extends Fragment {
 //                tvPostTitle.setText("Page title:" +postTitle);
 //                tvPostUrl.setText("Page PARSE_URL:" +postUrl);
             }
-
-        }catch(Exception e){
-            Log.i("App", "Error parsing data" +e.getMessage());
-
+        } catch(Exception e){
+            Log.i ("App", "Error parsing data" + e.getMessage());
         }
-
         return info;
     }
 
     @Override
     public void onResume() {
         MainActivity.toolbar.setTitle("News");
+        MainActivity.action_refresh.setVisible(true);
         super.onResume();
     }
 
-
+    @Override
+    public void onPause() {
+        MainActivity.action_refresh.setVisible(false);
+        super.onPause();
+    }
 }
