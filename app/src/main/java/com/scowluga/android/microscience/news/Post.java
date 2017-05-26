@@ -22,6 +22,8 @@ public class Post {
         this.content = c;
     }
 
+    // STATIC FUNCTIONALITY
+
     public static String encode (Post p) {
         String ret = "";
         ret += p.title + SMALL_DELIM
@@ -33,5 +35,24 @@ public class Post {
         List<String> characters = new ArrayList<>(Arrays.asList(s.split(SMALL_DELIM)));
         Post p = new Post(characters.get(0), characters.get(1));
         return p;
+    }
+
+    public static String grandEncode (List<Post> postList) {
+        String ret = "";
+
+        for (int i = 0; i < postList.size() - 1; i ++) {
+            ret += encode(postList.get(i)) + GRAND_DELIM;
+        }
+        ret += encode(postList.get(postList.size() - 1));
+        return ret;
+    }
+
+    public static List<Post> grandDecode (String file) {
+        List<String> posts = new ArrayList<>(Arrays.asList(file.split(GRAND_DELIM)));
+        List<Post> postList = new ArrayList<>();
+        for (String post : posts) {
+            postList.add(decode(post));
+        }
+        return postList;
     }
 }

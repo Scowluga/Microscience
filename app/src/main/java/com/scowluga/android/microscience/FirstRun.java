@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.scowluga.android.microscience.news.NewsProvider;
+
 import java.io.File;
 
 public class FirstRun extends AppCompatActivity {
@@ -105,7 +107,7 @@ public class FirstRun extends AppCompatActivity {
             if (first) {
                 f = new File(getApplicationContext().getFilesDir(), MainActivity.NEWS_FILENAME);
             } else {
-                // pass
+
             }
 
 
