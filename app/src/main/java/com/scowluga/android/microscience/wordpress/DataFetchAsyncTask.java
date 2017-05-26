@@ -31,7 +31,7 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, String> {
     private ProgressDialog progressDialog;
 
     private HttpURLConnection urlConnection;
-    private String PARSE_URL = "https://microscience.on.ca/api/?json=get_news&post_id=1";
+    private String PARSE_URL;
 
 
     public DataFetchAsyncTask(Activity a, String url, AsyncResponse delegate){
