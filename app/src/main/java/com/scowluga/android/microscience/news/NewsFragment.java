@@ -88,16 +88,17 @@ public class NewsFragment extends Fragment {
                         NewsProvider.rewriteContacts(getContext(), temp);
                         postList = temp;
 
-                        NewsAdapter adapter = new NewsAdapter(temp, getContext());
+//                        NewsAdapter adapter = new NewsAdapter(temp, getContext());
 
-    //
-    //                    // REATTACH THE FRAGMENT
-    //                    AppCompatActivity act = (AppCompatActivity)getActivity();
-    //                    Fragment frag = act.getSupportFragmentManager().findFragmentByTag(MainActivity.TAGFRAGMENT);
-    //                    act.getSupportFragmentManager().beginTransaction()
-    //                            .detach(frag)
-    //                            .attach(frag)
-    //                            .commit();
+                        if (isRunning) {
+                            // REATTACH THE FRAGMENT
+                            AppCompatActivity act = (AppCompatActivity)getActivity();
+                            Fragment frag = act.getSupportFragmentManager().findFragmentByTag(MainActivity.TAGFRAGMENT);
+                            act.getSupportFragmentManager().beginTransaction()
+                                    .detach(frag)
+                                    .attach(frag)
+                                    .commit();
+                        }
                     }
                 }
             }).execute();
