@@ -1,6 +1,8 @@
 package com.scowluga.android.microscience.news;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -41,8 +43,8 @@ public class NewsFragment extends Fragment {
 
     // ACTUAL FUNCTIONS
 
-    List<Post> postList;
-    public boolean isRunning;
+    public static List<Post> postList;
+    public static boolean isRunning = false;
     public static final String fetchURL = "https://microscience.on.ca/wp-json/wp/v2/posts?fields=title,content";
 
     public static RecyclerView rv;
@@ -59,7 +61,7 @@ public class NewsFragment extends Fragment {
         sl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshStorage();
+                refreshStorage(getContext(), getActivity());
             }
         });
 
@@ -74,44 +76,48 @@ public class NewsFragment extends Fragment {
         return v;
     }
 
-    public void refreshStorage() {
-        Toast.makeText(getContext(), "refreshing", Toast.LENGTH_SHORT).show();
-
-        if (FirstRun.wifiOn(getContext())) {
+    public static void refreshStorage(final Context context, final Activity activity) {
+        if (FirstRun.wifiOn(context)) {
             // Getting Data
-            DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(getActivity(), fetchURL, new DataFetchAsyncTask.AsyncResponse(){
+            DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(activity, isRunning, fetchURL, new DataFetchAsyncTask.AsyncResponse(){
                 @Override
                 public void processFinish(String output){
-                    Toast.makeText(getContext(), output, Toast.LENGTH_SHORT).show();
                     List<Post> temp = parseNews(output);
 
-                    if (temp != postList) {
-                        // REWRITING
-                        NewsProvider.clearFile(getContext(), MainActivity.NEWS_FILENAME);
-                        NewsProvider.rewriteContacts(getContext(), temp);
-                        postList = temp;
+                    if (isRunning) {
+                        if (temp == postList) { // same
+                            // do nothing
+                        } else { // THERES DIFFERENCE
+                            NewsProvider.rewriteContacts(context, temp);
+                            postList = temp;
 
-                        if (isRunning) {
-                            if (adapter != null) {
+                            if (adapter == null) {
+                                adapter = new NewsAdapter(temp, context);
+                            } else {
                                 adapter.postList = temp;
                                 adapter.notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(getContext(), "Adapter is null", Toast.LENGTH_SHORT).show();
-                            // REATTACH THE FRAGMENT
-                            AppCompatActivity act = (AppCompatActivity)getActivity();
-                            Fragment frag = act.getSupportFragmentManager().findFragmentByTag(MainActivity.TAGFRAGMENT);
-                            act.getSupportFragmentManager().beginTransaction()
-                                    .detach(frag)
-                                    .attach(frag)
-                                    .commit();
                             }
 
+                            // re-attach fragment?
+//                            AppCompatActivity act = (AppCompatActivity)getActivity();
+//                            Fragment frag = act.getSupportFragmentManager().findFragmentByTag(MainActivity.TAGFRAGMENT);
+//                            act.getSupportFragmentManager().beginTransaction()
+//                                    .detach(frag)
+//                                    .attach(frag)
+//                                    .commit();
+                        }
+                    } else { // INITIALIZING
+                        if (FirstRun.first) { // FIRST RUN
+                            NewsProvider.rewriteContacts(context, temp);
+                        } else { // initializing not first run
+                            NewsProvider.rewriteContacts(context, temp);
                         }
                     }
                 }
             }).execute();
         }
     }
+
     public static List<Post> parseNews(String output) {
         List<Post> info = new ArrayList<>();
 
@@ -121,11 +127,10 @@ public class NewsFragment extends Fragment {
             for(int i = 0; i < jsonArray.length(); i++) {
                 JSONObject childObj = jsonArray.getJSONObject(i);
                 String postTitle = new JSONObject(childObj.getString("title")).getString("rendered");
-                String postContent = new JSONObject(childObj.getString("excerpt")).getString("rendered");
+                String postContent = new JSONObject(childObj.getString("content")).getString("rendered");
 
                 // PostContent formatting
                 postContent = postContent.replace("\\/", "/");
-
 
                 info.add(new Post(postTitle, postContent));
             }

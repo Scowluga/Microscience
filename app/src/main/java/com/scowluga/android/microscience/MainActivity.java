@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_refresh) {
             Fragment f = getSupportFragmentManager().findFragmentByTag(TAGFRAGMENT);
             if (f instanceof NewsFragment) { // IF NEWS FRAGMENT IS RUNNING ON UPDATE
-                ((NewsFragment) f).refreshStorage();
+                ((NewsFragment) f).refreshStorage(getApplicationContext(), this);
             }
             return true;
         }

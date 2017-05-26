@@ -32,19 +32,25 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, String> {
 
     private HttpURLConnection urlConnection;
     private String PARSE_URL;
+    private boolean showProgress;
 
 
-    public DataFetchAsyncTask(Activity a, String url, AsyncResponse delegate){
+    public DataFetchAsyncTask(Activity a, boolean show, String url, AsyncResponse delegate){
         this.PARSE_URL = url;
         this.delegate = delegate;
+        this.showProgress = show;
 
-        progressDialog = new ProgressDialog(a);
+        if (this.showProgress) {
+            progressDialog = new ProgressDialog(a);
+        }
     }
 
     @Override
     protected void onPreExecute() {
-        progressDialog.setMessage("Connecting to Database...");
-        progressDialog.show();
+        if (this.showProgress) {
+            progressDialog.setMessage("Connecting to Database...");
+            progressDialog.show();
+        }
     }
 
     @Override
@@ -75,10 +81,11 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        if (progressDialog.isShowing()) {
-            progressDialog.dismiss();
+        if (this.showProgress) {
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
         }
-
         // result is JSON String
         delegate.processFinish(result);
 
