@@ -60,4 +60,5 @@ public class Post {
             postList.add(decode(post));
         }
         return postList;
+    }
 }
