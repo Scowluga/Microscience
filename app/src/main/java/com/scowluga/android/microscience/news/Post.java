@@ -9,21 +9,27 @@ import java.util.List;
  */
 
 public class Post {
-
     public static final String GRAND_DELIM = "XXXXX";
     public static final String SMALL_DELIM = "-----";
 
-
     String title;
     String content;
+    String excerpt;
 
+    // CONSTRUCTORS 
     public Post(String t, String c) {
         this.title = t;
         this.content = c;
     }
-
+    public Post(String t, String c, String ex) {
+        this.title = t;
+        this.content = c;
+        this.excerpt = ex;
+    }
+  
+  
     // STATIC FUNCTIONALITY
-
+  
     public static String encode (Post p) {
         String ret = "";
         ret += p.title + SMALL_DELIM
@@ -54,5 +60,4 @@ public class Post {
             postList.add(decode(post));
         }
         return postList;
-    }
 }

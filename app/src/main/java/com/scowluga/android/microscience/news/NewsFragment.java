@@ -103,25 +103,22 @@ public class NewsFragment extends Fragment {
             }).execute();
         }
     }
-
     public static List<Post> parseNews(String output) {
         List<Post> info = new ArrayList<>();
-        try {
-            JSONObject jsonResponse = new JSONObject(output);
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("posts");
-            int postCount = Integer.parseInt(jsonResponse.getString("count"));
 
-            int jsonArrLength = jsonMainNode.length();
+        try{
+            JSONArray jsonArray = new JSONArray(output);
 
-            for(int i = 0; i < jsonArrLength; i++) {
+            for(int i = 0; i < jsonArray.length(); i++) {
+                JSONObject childObj = jsonArray.getJSONObject(i);
+                String postTitle = new JSONObject(childObj.getString("title")).getString("rendered");
+                String postContent = new JSONObject(childObj.getString("excerpt")).getString("rendered");
 
-                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                String postTitle = jsonChildNode.getString("title");
-                String postUrl = jsonChildNode.getString("content");
+                // PostContent formatting
+                postContent = postContent.replace("\\/", "/");
 
-//                tvPostCount.setText("Number of posts:" +postCount);
-//                tvPostTitle.setText("Page title:" +postTitle);
-//                tvPostUrl.setText("Page PARSE_URL:" +postUrl);
+
+                info.add(new Post(postTitle, postContent));
             }
         } catch(Exception e){
             Log.i ("App", "Error parsing data" + e.getMessage());
