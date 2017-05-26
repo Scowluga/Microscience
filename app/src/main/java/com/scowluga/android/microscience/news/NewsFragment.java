@@ -45,6 +45,9 @@ public class NewsFragment extends Fragment {
     public boolean isRunning;
     public static final String fetchURL = "https://microscience.on.ca/wp-json/wp/v2/posts?fields=title,content";
 
+    public static RecyclerView rv;
+    public static NewsAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,8 +65,8 @@ public class NewsFragment extends Fragment {
 
         postList = NewsProvider.getPosts(getContext());
 
-        RecyclerView rv = (RecyclerView) v.findViewById(R.id.news_recycler);
-        NewsAdapter adapter = new NewsAdapter(postList, getContext());
+        rv = (RecyclerView) v.findViewById(R.id.news_recycler);
+        adapter = new NewsAdapter(postList, getContext());
         rv.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(llm);
@@ -88,9 +91,12 @@ public class NewsFragment extends Fragment {
                         NewsProvider.rewriteContacts(getContext(), temp);
                         postList = temp;
 
-//                        NewsAdapter adapter = new NewsAdapter(temp, getContext());
-
                         if (isRunning) {
+                            if (adapter != null) {
+                                adapter.postList = temp;
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(getContext(), "Adapter is null", Toast.LENGTH_SHORT).show();
                             // REATTACH THE FRAGMENT
                             AppCompatActivity act = (AppCompatActivity)getActivity();
                             Fragment frag = act.getSupportFragmentManager().findFragmentByTag(MainActivity.TAGFRAGMENT);
@@ -98,6 +104,8 @@ public class NewsFragment extends Fragment {
                                     .detach(frag)
                                     .attach(frag)
                                     .commit();
+                            }
+
                         }
                     }
                 }

@@ -25,7 +25,7 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
-    List<Post> postList;
+    public static List<Post> postList;
     Context context;
 
     public NewsAdapter (List<Post> posts, Context c) {
