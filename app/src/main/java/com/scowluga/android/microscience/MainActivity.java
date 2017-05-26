@@ -38,7 +38,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAGFRAGMENT = "TAGFRAGMENT";
+    public static final String TAGFRAGMENT = "TAGFRAGMENT";
 
     public static DrawerLayout drawer;
     public static Toolbar toolbar;

@@ -7,11 +7,17 @@ package com.scowluga.android.microscience.news;
 public class Post {
 
     String title;
-
     String content;
+    String excerpt;
 
     public Post(String t, String c) {
         this.title = t;
         this.content = c;
+    }
+
+    public Post(String t, String c, String ex) {
+        this.title = t;
+        this.content = c;
+        this.excerpt = ex;
     }
 }

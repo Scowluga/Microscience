@@ -1,6 +1,10 @@
 package com.scowluga.android.microscience.news;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -10,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.scowluga.android.microscience.MainActivity;
 import com.scowluga.android.microscience.R;
 
 import java.util.List;
@@ -51,7 +56,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-            // nothing on click
+            Fragment frag = NewsDetails.newInstance(titleText.getText().toString(), contentText.getText().toString());
+            FragmentManager manager = ((AppCompatActivity) v.getContext()).getSupportFragmentManager();
+            manager.beginTransaction()
+                    .hide(manager.findFragmentByTag(MainActivity.TAGFRAGMENT))
+                    .add(R.id.frag_layout, frag, MainActivity.TAGFRAGMENT)
+                    .addToBackStack(MainActivity.TAGFRAGMENT)
+                    .commit();
         }
     }
 
@@ -71,7 +82,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         Post p = postList.get(position);
         holder.titleText.setText(p.title);
         String content = p.content;
-        content = content.replace("\\/", "/");
         holder.contentText.setText(Html.fromHtml(content));
 
     }

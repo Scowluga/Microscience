@@ -43,13 +43,11 @@ public class NewsFragment extends Fragment {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment3_news, container, false);
 
-        String fetchURL = "https://microscience.on.ca/wp-json/wp/v2/posts?fields=title,content";
+        String fetchURL = "https://microscience.on.ca/wp-json/wp/v2/posts?fields=title,content,excerpt";
         DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(getActivity(), fetchURL, new DataFetchAsyncTask.AsyncResponse(){
             @Override
             public void processFinish(String output){
-                Toast.makeText(getContext(), output, Toast.LENGTH_SHORT).show();
                 postList = parseNews(output);
-
                 RecyclerView rv = (RecyclerView) v.findViewById(R.id.news_recycler);
                 NewsAdapter adapter = new NewsAdapter(postList, getContext());
                 rv.setAdapter(adapter);
@@ -64,26 +62,22 @@ public class NewsFragment extends Fragment {
         List<Post> info = new ArrayList<>();
 
         try{
-            JSONObject jsonResponse = new JSONObject(output);
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("posts");
-            int postCount = Integer.parseInt(jsonResponse.getString("count"));
+            JSONArray jsonArray = new JSONArray(output);
 
-            int jsonArrLength = jsonMainNode.length();
+            for(int i = 0; i < jsonArray.length(); i++) {
+                JSONObject childObj = jsonArray.getJSONObject(i);
+                String postTitle = new JSONObject(childObj.getString("title")).getString("rendered");
+                String postContent = new JSONObject(childObj.getString("excerpt")).getString("rendered");
 
-            for(int i = 0; i < jsonArrLength; i++) {
+                // PostContent formatting
+                postContent = postContent.replace("\\/", "/");
 
-                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                String postTitle = jsonChildNode.getString("title");
-                String postUrl = jsonChildNode.getString("content");
 
-//                tvPostCount.setText("Number of posts:" +postCount);
-//                tvPostTitle.setText("Page title:" +postTitle);
-//                tvPostUrl.setText("Page PARSE_URL:" +postUrl);
+                info.add(new Post(postTitle, postContent));
             }
 
         }catch(Exception e){
             Log.i("App", "Error parsing data" +e.getMessage());
-
         }
 
         return info;
