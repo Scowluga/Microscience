@@ -5,22 +5,10 @@
     tools:context="com.scowluga.android.microscience.products.ProductFragment"
     style="@style/LayoutMargins">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/product_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/marginOut">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="We haven't got here yet chill Wordpress will be annoying but let us see ;) "
-            android:layout_marginBottom="20dp"
-            style="@style/mediumText"/>
-
-        <include
-            layout="@layout/fragment0_contact_footer"/>
-    </LinearLayout>
-
+        android:paddingTop="@dimen/marginOut">
+    </android.support.v7.widget.RecyclerView>
 </FrameLayout>

@@ -49,7 +49,9 @@ public class Post {
         for (int i = 0; i < postList.size() - 1; i ++) {
             ret += encode(postList.get(i)) + GRAND_DELIM;
         }
-        ret += encode(postList.get(postList.size() - 1));
+        if (postList.size() > 0) {
+            ret += encode(postList.get(postList.size() - 1));
+        }
         return ret;
     }
 

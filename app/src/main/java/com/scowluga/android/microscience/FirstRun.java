@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -54,13 +56,21 @@ public class FirstRun extends AppCompatActivity {
             @Override
             public void processFinish(String output){
                 List<Post> temp = parseNews(output);
-                NewsProvider.rewriteContacts(getApplicationContext(), temp);
-                if (first) {
-                    // Set 'first' as false so the setup doesn't happen every time
-                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                            .putBoolean("isFirst", false).apply();
+                if (temp.size() > 0) {
+                    NewsProvider.rewriteContacts(getApplicationContext(), temp);
+                    if (first) {
+                        // Set 'first' as false so the setup doesn't happen every time
+                        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                .putBoolean("isFirst", false).apply();
+                    }
+                    beginMain();
+                } else { // empty list
+                    if (first) {
+                        displayError("Error", "Please connect to Wifi for first run.");
+                    } else {
+                        beginMain();
+                    }
                 }
-                beginMain();
             }
         }).execute();
     }
@@ -88,19 +98,23 @@ public class FirstRun extends AppCompatActivity {
     }
 
     public static boolean wifiOn(Context context) { // FROM NOW ON if (wifiOn) is checking if there is wifi
-        WifiManager wifiMgr = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        return mWifi.isConnected();
 
-        if (wifiMgr.isWifiEnabled()) { // Wi-Fi adapter is ON
-
-            WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
-
-            if( wifiInfo.getNetworkId() == -1 ){
-                return false; // Not connected to an access point
-            }
-            return true; // Connected to an access point
-        }
-        else {
-            return false; // Wi-Fi adapter is OFF
-        }
+//        WifiManager wifiMgr = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+//
+//        if (wifiMgr.isWifiEnabled()) { // Wi-Fi adapter is ON
+//
+//            WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
+//
+//            if( wifiInfo.getNetworkId() == -1 ){
+//                return false; // Not connected to an access point
+//            }
+//            return true; // Connected to an access point
+//        }
+//        else {
+//            return false; // Wi-Fi adapter is OFF
+//        }
     } // boolean for if there is wifi
 }

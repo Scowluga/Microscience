@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -25,6 +26,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,6 +54,8 @@ public class NewsFragment extends Fragment {
     public static RecyclerView rv;
     public static NewsAdapter adapter;
 
+    public static SwipeRefreshLayout sl;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,7 +63,7 @@ public class NewsFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment3_news, container, false);
 
         // Swipe Refresh Layout
-        SwipeRefreshLayout sl = (SwipeRefreshLayout)v.findViewById(R.id.news_swipe_refresh);
+        sl = (SwipeRefreshLayout)v.findViewById(R.id.news_swipe_refresh);
         sl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -70,8 +76,7 @@ public class NewsFragment extends Fragment {
         rv = (RecyclerView) v.findViewById(R.id.news_recycler);
         adapter = new NewsAdapter(postList, getContext());
         rv.setAdapter(adapter);
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        rv.setLayoutManager(llm);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return v;
     }
@@ -84,37 +89,41 @@ public class NewsFragment extends Fragment {
                 public void processFinish(String output){
                     List<Post> temp = parseNews(output);
 
-                    if (isRunning) {
+                    if (temp.size() > 0) {
                         if (temp == postList) { // same
-                            // do nothing
-                        } else { // THERES DIFFERENCE
+                            // Do nothing. No new data
+                        } else { // DIFFERENT
                             NewsProvider.rewriteContacts(context, temp);
                             postList = temp;
 
-                            if (adapter == null) {
-                                adapter = new NewsAdapter(temp, context);
-                            } else {
-                                adapter.postList = temp;
-                                adapter.notifyDataSetChanged();
+                            if (isRunning) {
+                                if (adapter == null) {
+                                    adapter = new NewsAdapter(temp, context);
+                                } else {
+                                    adapter.postList = temp;
+                                    adapter.notifyDataSetChanged();
+                                }
+                            } else { // not running
+                                // Do nothing.
                             }
-
-                            // re-attach fragment?
-//                            AppCompatActivity act = (AppCompatActivity)getActivity();
-//                            Fragment frag = act.getSupportFragmentManager().findFragmentByTag(MainActivity.TAGFRAGMENT);
-//                            act.getSupportFragmentManager().beginTransaction()
-//                                    .detach(frag)
-//                                    .attach(frag)
-//                                    .commit();
                         }
-                    } else { // INITIALIZING
-                        if (FirstRun.first) { // FIRST RUN
-                            NewsProvider.rewriteContacts(context, temp);
-                        } else { // initializing not first run
-                            NewsProvider.rewriteContacts(context, temp);
-                        }
+                    } else { // nothing in temporary.
+                        // Do nothing. You already have data read from file
+                    }
+                    if (sl != null) {
+                        sl.setRefreshing(false);
                     }
                 }
             }).execute();
+        } else {
+            sl.setRefreshing(true);
+            final ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+            exec.schedule(new Runnable(){
+                @Override
+                public void run(){
+                    sl.setRefreshing(false);
+                }
+            }, 1, TimeUnit.SECONDS);
         }
     }
 
