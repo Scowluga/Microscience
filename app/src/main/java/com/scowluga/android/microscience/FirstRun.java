@@ -55,7 +55,7 @@ public class FirstRun extends AppCompatActivity {
         DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(FirstRun.this, true, fetchURL, new DataFetchAsyncTask.AsyncResponse(){
             @Override
             public void processFinish(String output){
-                List<Post> temp = parseNews(output);
+                List<Post> temp = parseNews(output, NewsProvider.getPosts(getApplicationContext()));
                 if (temp.size() > 0) {
                     NewsProvider.rewriteContacts(getApplicationContext(), temp);
                     if (first) {

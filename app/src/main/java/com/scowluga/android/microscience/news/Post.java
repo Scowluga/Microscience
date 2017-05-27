@@ -12,21 +12,27 @@ public class Post {
     public static final String GRAND_DELIM = "XXXXX";
     public static final String SMALL_DELIM = "-----";
 
+    String id;
     String title;
     String content;
-    String excerpt;
+    String date;
+    String link;
+    String image;
 
-    // CONSTRUCTORS 
-    public Post(String t, String c) {
+    // CONSTRUCTORS
+
+    public Post (String i) {
+        this.id = i;
+    }
+
+    public Post(String i, String t, String c, String d, String l, String im) {
+        this.id = i;
         this.title = t;
         this.content = c;
+        this.date = d;
+        this.link = l;
+        this.image = im;
     }
-    public Post(String t, String c, String ex) {
-        this.title = t;
-        this.content = c;
-        this.excerpt = ex;
-    }
-  
   
     // STATIC FUNCTIONALITY
   
@@ -62,5 +68,17 @@ public class Post {
             postList.add(decode(post));
         }
         return postList;
+    }
+
+    // OTHER
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

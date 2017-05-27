@@ -24,6 +24,7 @@ import com.scowluga.android.microscience.wordpress.DataFetchAsyncTask;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -49,7 +50,7 @@ public class NewsFragment extends Fragment {
 
     public static List<Post> postList;
     public static boolean isRunning = false;
-    public static final String fetchURL = "https://microscience.on.ca/wp-json/wp/v2/posts?fields=title,content";
+    public static final String fetchURL = "https://microscience.on.ca/wp-json/wp/v2/posts?fields=title,content,link,featured_media,date,id";
 
     public static RecyclerView rv;
     public static NewsAdapter adapter;
@@ -87,7 +88,7 @@ public class NewsFragment extends Fragment {
             DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(activity, isRunning, fetchURL, new DataFetchAsyncTask.AsyncResponse(){
                 @Override
                 public void processFinish(String output){
-                    List<Post> temp = parseNews(output);
+                    List<Post> temp = parseNews(output, postList);
 
                     if (temp.size() > 0) {
                         if (temp == postList) { // same
@@ -126,22 +127,34 @@ public class NewsFragment extends Fragment {
             }, 1, TimeUnit.SECONDS);
         }
     }
+    String x = "featured_image2433";
 
-    public static List<Post> parseNews(String output) {
+    public static List<Post> parseNews(String output, List<Post> posts) {
         List<Post> info = new ArrayList<>();
+
+        SimpleDateFormat inFmt = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outFmt = new SimpleDateFormat("MMM dd, yyyy");
 
         try{
             JSONArray jsonArray = new JSONArray(output);
 
             for(int i = 0; i < jsonArray.length(); i++) {
                 JSONObject childObj = jsonArray.getJSONObject(i);
-                String postTitle = new JSONObject(childObj.getString("title")).getString("rendered");
-                String postContent = new JSONObject(childObj.getString("content")).getString("rendered");
+                String id = childObj.getString("id");
+                String title = new JSONObject(childObj.getString("title")).getString("rendered");
+                String content = (new JSONObject(childObj.getString("content")).getString("rendered")).replace("\\/", "/");
+                String date = outFmt.format(inFmt.parse(childObj.getString("date").substring(0, 11)));
+                String link = childObj.getString("link").replace("\\/", "/");
 
-                // PostContent formatting
-                postContent = postContent.replace("\\/", "/");
+                if (posts.contains(new Post(id))) {
+                    info.add(new Post(id, title, content, date, link, "featured_image" + id));
+                } else { // It's new!
+                    String name = "featured_image" + id;
+                    // SAVE INTO INTERNAL
 
-                info.add(new Post(postTitle, postContent));
+                    info.add(new Post(id, title, content, date, link, name));
+
+                }
             }
         } catch(Exception e){
             Log.i ("App", "Error parsing data" + e.getMessage());

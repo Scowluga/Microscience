@@ -54,6 +54,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
+            Post p = postList.get(NewsFragment.rv.indexOfChild(v));
             Fragment frag = NewsDetails.newInstance(titleText.getText().toString(), contentText.getText().toString());
             FragmentManager manager = ((AppCompatActivity) v.getContext()).getSupportFragmentManager();
             manager.beginTransaction()
