@@ -12,6 +12,8 @@ public class Post {
     public static final String GRAND_DELIM = "XXXXX";
     public static final String SMALL_DELIM = "-----";
 
+    public static final String NO_IMAGE = "no_image";
+
     String id;
     String title;
     String content;
@@ -26,7 +28,7 @@ public class Post {
     }
 
     public Post(String i, String t, String c, String d, String l, String im) {
-        this.id = i;
+        this.id = i; // OF FEATURED MEDIA
         this.title = t;
         this.content = c;
         this.date = d;
@@ -79,7 +81,7 @@ public class Post {
     public boolean equals(Object obj) {
         if (obj instanceof Post) {
             Post p = (Post)obj;
-            return p.id == this.id;
+            return p.id.equals(this.id);
         }
         return false;
     }

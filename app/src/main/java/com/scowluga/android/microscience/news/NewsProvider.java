@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.scowluga.android.microscience.FirstRun;
 import com.scowluga.android.microscience.MainActivity;
 
 import java.io.FileInputStream;
@@ -23,6 +24,9 @@ import static android.content.Context.MODE_APPEND;
 public class NewsProvider {
 
     public static List<Post> getPosts(Context context) {
+        if (FirstRun.first) {
+            return new ArrayList<>();
+        }
         // Getting the entire string of the file
         String file = getString(context, MainActivity.NEWS_FILENAME);
         if (TextUtils.isEmpty(file)) { // If there is no text in the file (empty)

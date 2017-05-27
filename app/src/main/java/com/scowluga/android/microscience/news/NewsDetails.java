@@ -56,7 +56,11 @@ public class NewsDetails extends Fragment {
         contentTv.setText(Html.fromHtml(post.content));
 
         ImageView imageView = (ImageView) v.findViewById(R.id.news_detail_image);
-        imageView.setImageBitmap(StorageManager.loadImageFromStorage(post.image, getContext()));
+        if (post.image.equals(Post.NO_IMAGE)) {
+            imageView.setVisibility(View.GONE);
+        } else {
+            imageView.setImageBitmap(StorageManager.loadImageFromStorage(post.image, getContext()));
+        }
 
         Button linkBtn = (Button) v.findViewById(R.id.news_detail_link);
         linkBtn.setOnClickListener(new View.OnClickListener() {

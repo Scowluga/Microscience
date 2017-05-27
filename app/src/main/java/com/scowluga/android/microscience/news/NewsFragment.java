@@ -62,7 +62,7 @@ public class NewsFragment extends Fragment {
 
     public static List<Post> postList;
     public static boolean isRunning = false;
-    public static final String fetchURL = "https://microscience.on.ca/wp-json/wp/v2/posts?fields=title,content,link,featured_media,date,id";
+    public static final String fetchURL = "https://microscience.on.ca/wp-json/wp/v2/posts?fields=title,content,link,id,date,featured_media";
 
     public static RecyclerView rv;
     public static NewsAdapter adapter;
@@ -97,18 +97,15 @@ public class NewsFragment extends Fragment {
     public static void refreshStorage(final Context context, final Activity activity) {
         if (FirstRun.wifiOn(context)) {
             // Getting Data
-            DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(activity, isRunning, fetchURL, new DataFetchAsyncTask.AsyncResponse(){
+            DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(postList, activity, isRunning, fetchURL, new DataFetchAsyncTask.AsyncResponse() {
                 @Override
-                public void processFinish(String output){
-                    List<Post> temp = parseNews(output, postList, context);
-
-                    if (temp.size() > 0) {
-                        if (temp == postList) { // same
-                            // Do nothing. No new data
-                        } else { // DIFFERENT
-                            NewsProvider.rewriteContacts(context, temp);
-                            postList = temp;
-
+                public void processFinish(Integer output) {
+                    switch (output) {
+                        case DataFetchAsyncTask.KEY_EMPTY:
+                            // nothing
+                            break;
+                        case DataFetchAsyncTask.KEY_NEW:
+                            List<Post> temp = NewsProvider.getPosts(context);
                             if (isRunning) {
                                 if (adapter == null) {
                                     adapter = new NewsAdapter(temp, context);
@@ -119,13 +116,12 @@ public class NewsFragment extends Fragment {
                             } else { // not running
                                 // Do nothing.
                             }
-                        }
-                    } else { // nothing in temporary.
-                        // Do nothing. You already have data read from file
+                            break;
+                        case DataFetchAsyncTask.KEY_SAME:
+                            // do nothing
+                            break;
                     }
-                    if (sl != null) {
-                        sl.setRefreshing(false);
-                    }
+                    sl.setRefreshing(false);
                 }
             }).execute();
         } else {
@@ -140,81 +136,7 @@ public class NewsFragment extends Fragment {
         }
     }
 
-    private static final String MEDIA_URL = "https://microscience.on.ca/wp-json/wp/v2/media/";
-
-    public static List<Post> parseNews(String output, List<Post> posts, Context context) {
-        List<Post> info = new ArrayList<>();
-
-        SimpleDateFormat inFmt = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat outFmt = new SimpleDateFormat("MMM dd, yyyy");
-
-        try {
-            JSONArray jsonArray = new JSONArray(output);
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject childObj = jsonArray.getJSONObject(i);
-                String id = childObj.getString("id");
-                String title = new JSONObject(childObj.getString("title")).getString("rendered");
-                String content = (new JSONObject(childObj.getString("content")).getString("rendered")).replace("\\/", "/");
-                String date = outFmt.format(inFmt.parse(childObj.getString("date").substring(0, 11)));
-                String link = childObj.getString("link").replace("\\/", "/");
-
-                if (posts.contains(new Post(id))) {
-                    info.add(new Post(id, title, content, date, link, "featured_image" + id + "?fields=guid"));
-                } else { // It's new!
-                    String name = "featured_image" + id;
-                    // SAVE INTO INTERNAL
-
-                    // get image -> save
-
-                    URL url = new URL(MEDIA_URL + id);
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-                    StringBuilder result = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        result.append(line);
-                    }
-                    String res = result.toString();
-
-                    JSONObject imageObj = new JSONObject(res);
-                    String imageLink = new JSONObject(imageObj.getString("guid")).getString("rendered").replace("\\/", "/");
-                    Bitmap b = getBitmapFromURL(imageLink);
-
-                    StorageManager.saveToInternalStorage(b, name, context);
-
-                    info.add(new Post(id, title, content, date, link, name));
-                }
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return info;
-    }
-
-    public static Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            // Log exception
-            return null;
-        }
-    }
-
-        @Override
+    @Override
     public void onResume() {
         MainActivity.toolbar.setTitle("News");
         MainActivity.action_refresh.setVisible(true);

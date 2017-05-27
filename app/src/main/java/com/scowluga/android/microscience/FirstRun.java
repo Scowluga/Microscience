@@ -13,19 +13,13 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.scowluga.android.microscience.news.NewsAdapter;
-import com.scowluga.android.microscience.news.NewsFragment;
 import com.scowluga.android.microscience.news.NewsProvider;
-import com.scowluga.android.microscience.news.Post;
 import com.scowluga.android.microscience.wordpress.DataFetchAsyncTask;
 
 import java.io.File;
-import java.util.List;
 
 import static com.scowluga.android.microscience.news.NewsFragment.fetchURL;
-import static com.scowluga.android.microscience.news.NewsFragment.parseNews;
 
 public class FirstRun extends AppCompatActivity {
     public static boolean first;
@@ -38,6 +32,10 @@ public class FirstRun extends AppCompatActivity {
         // If this is the first run, then 'first' will not exist. Therefore defaulted to true
         first = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirst", true);
+
+        if (first) {
+            File f = new File(getFilesDir(), MainActivity.NEWS_FILENAME);
+        }
 
         if (wifiOn(getApplicationContext())) { // WIFI
             runSetUp();
@@ -52,29 +50,33 @@ public class FirstRun extends AppCompatActivity {
     }
 
     private void runSetUp() {
-        DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(FirstRun.this, true, fetchURL, new DataFetchAsyncTask.AsyncResponse(){
+        DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(NewsProvider.getPosts(getApplicationContext()), FirstRun.this, true, fetchURL, new DataFetchAsyncTask.AsyncResponse(){
             @Override
-            public void processFinish(String output){
-                List<Post> posts = NewsProvider.getPosts(getApplicationContext());
-                List<Post> temp = parseNews(output, posts, getApplicationContext());
-                if (temp.size() > 0) {
-                    if (temp == posts) { // same
-                        // Do nothing. No new data
-                    } else { // DIFFERENT
-                        NewsProvider.rewriteContacts(getApplicationContext(), temp);
+            public void processFinish(Integer output){
+                switch (output) {
+                    case DataFetchAsyncTask.KEY_EMPTY:
                         if (first) {
-                            // Set 'first' as false so the setup doesn't happen every time
+                            displayError("Error", "Please connect to Wifi for first run.");
+                        } else {
+                            beginMain();
+                        }
+                        break;
+                    case DataFetchAsyncTask.KEY_NEW:
+                        if (first) { // Set 'first' as false so the setup doesn't happen every time
+                            first = false;
                             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                     .putBoolean("isFirst", false).apply();
                         }
                         beginMain();
-                    }
-                } else { // empty list
-                    if (first) {
-                        displayError("Error", "Please connect to Wifi for first run.");
-                    } else {
+                        break;
+                    case DataFetchAsyncTask.KEY_SAME:
+                        if (first) { // Set 'first' as false so the setup doesn't happen every time
+                            first = false;
+                            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                    .putBoolean("isFirst", false).apply();
+                        }
                         beginMain();
-                    }
+                        break;
                 }
             }
         }).execute();

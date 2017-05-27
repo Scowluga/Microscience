@@ -82,7 +82,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.titleText.setText(p.title);
         String content = p.content;
         holder.contentText.setText(Html.fromHtml(content));
-        holder.imageView.setImageBitmap(StorageManager.loadImageFromStorage(p.image, context));
+        if (p.image.equals(Post.NO_IMAGE)) {
+            holder.imageView.setVisibility(View.GONE);
+        } else {
+            holder.imageView.setImageBitmap(StorageManager.loadImageFromStorage(p.image, context));
+        }
     }
 
     @Override

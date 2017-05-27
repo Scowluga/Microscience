@@ -42,7 +42,7 @@ public class ProductFragment extends Fragment {
         List<Category> categories = Category.getCategories();
         RecyclerView rv = (RecyclerView)v.findViewById(R.id.product_rv);
 
-        // Check Training OnClick for Learn More 
+        // Check Training OnClick for Learn More
 
         return v;
     }
