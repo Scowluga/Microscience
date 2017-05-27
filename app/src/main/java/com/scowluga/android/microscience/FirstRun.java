@@ -32,7 +32,6 @@ public class FirstRun extends AppCompatActivity {
         // If this is the first run, then 'first' will not exist. Therefore defaulted to true
         first = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirst", true);
-
         if (first) {
             File f = new File(getFilesDir(), MainActivity.NEWS_FILENAME);
         }

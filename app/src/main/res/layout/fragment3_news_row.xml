@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/marginOut"
-    android:layout_marginRight="@dimen/marginOut">
+    android:padding="@dimen/marginOut">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,8 +25,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/infoText"
-                    android:maxLines="5"
+                    android:maxLines="4"
                     android:text="Hello"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/accentText"
+                    android:text="Read More..."
+                    />
             </LinearLayout>
             <ImageView
                 android:id="@+id/news_regular_image"

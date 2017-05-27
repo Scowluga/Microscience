@@ -17,20 +17,18 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class ProductFragment extends Fragment {
-
-
     public ProductFragment() {
         // Required empty public constructor
     }
-
     public static ProductFragment newInstance() {
-
         Bundle args = new Bundle();
-
         ProductFragment fragment = new ProductFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
+    public static final String FIRST_URL = "https://microscience.on.ca/products/";
+    public static RecyclerView rv;
 
 
     @Override
@@ -40,9 +38,7 @@ public class ProductFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment3_product, container, false);
 
         List<Category> categories = Category.getCategories();
-        RecyclerView rv = (RecyclerView)v.findViewById(R.id.product_rv);
-
-        // Check Training OnClick for Learn More
+        rv = (RecyclerView)v.findViewById(R.id.product_rv);
 
         return v;
     }

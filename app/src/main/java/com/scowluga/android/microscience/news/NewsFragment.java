@@ -106,7 +106,7 @@ public class NewsFragment extends Fragment {
                             break;
                         case DataFetchAsyncTask.KEY_NEW:
                             List<Post> temp = NewsProvider.getPosts(context);
-                            if (isRunning) {
+                            if (isRunning) { // RESETTING ADAPTER + notifyDataSetChanged();
                                 if (adapter == null) {
                                     adapter = new NewsAdapter(temp, context);
                                 } else {

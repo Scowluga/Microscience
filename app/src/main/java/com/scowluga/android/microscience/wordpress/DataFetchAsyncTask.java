@@ -78,7 +78,7 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
     @Override
     protected Integer doInBackground(String... args) {
         StringBuilder result = new StringBuilder();
-        int key = KEY_ERROR;
+        int key;
         try {
             URL url = new URL(PARSE_URL);
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -124,7 +124,7 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
         try {
             JSONArray jsonArray = new JSONArray(output);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
+            for (int i = 0; i < jsonArray.length(); i++) { // FOR EACH OBJECT
                 JSONObject childObj = jsonArray.getJSONObject(i);
                 String id = childObj.getString("id");
                 String title = new JSONObject(childObj.getString("title")).getString("rendered");
@@ -132,20 +132,17 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
                 String date = outFmt.format(inFmt.parse(childObj.getString("date").substring(0, 11)));
                 String link = childObj.getString("link").replace("\\/", "/");
 
-                if (posts.contains(new Post(id))) {
-                    info.add(new Post(id, title, content, date, link, "featured_image" + id + "?fields=guid"));
+                if (posts.contains(new Post(id))) { // if it already exists, skip
+                    info.add(new Post(id, title, content, date, link, "featured_image" + id));
                 } else { // It's new!
                     String featured = childObj.getString("featured_media");
-                    boolean hasImage = featured.equals("0");
-                    if (hasImage) {
+                    boolean noImage = featured.equals("0");
+                    if (noImage) { // doesn't have an image, set tag
                         info.add(new Post(id, title, content, date, link, Post.NO_IMAGE));
                     } else { // HAS AN IMAGE
+                        // READING IN
                         String name = "featured_image" + id;
-                        // SAVE INTO INTERNAL
-
-                        // get image -> save
-                        String path = MEDIA_URL + id;
-                        URL url = new URL(path);
+                        URL url = new URL(MEDIA_URL + id + "?fields=guid");
                         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                         InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 
@@ -158,12 +155,13 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
                         }
                         String res = result.toString();
 
+                        // GETTING NEW URL
                         JSONArray array = new JSONArray(res);
                         JSONObject imageObj = array.getJSONObject(0);
                         String imageLink = new JSONObject(imageObj.getString("guid")).getString("rendered").replace("\\/", "/");
-                        Bitmap b = getBitmapFromURL(imageLink);
+                        Bitmap b = getBitmapFromURL(imageLink); // GETTING BITMAP
 
-                        StorageManager.saveToInternalStorage(b, name, context);
+                        StorageManager.saveToInternalStorage(b, name, context); // saving
 
                         info.add(new Post(id, title, content, date, link, name));
                     }
