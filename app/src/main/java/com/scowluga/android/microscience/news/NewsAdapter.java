@@ -38,6 +38,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         // for any view that will be set as you render a row
         public TextView titleText;
         public TextView contentText;
+        public ImageView imageView;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -46,8 +47,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            titleText = (TextView) itemView.findViewById(R.id.news_title);
-            contentText = (TextView) itemView.findViewById(R.id.news_content);
+            titleText = (TextView) itemView.findViewById(R.id.news_regular_title);
+            contentText = (TextView) itemView.findViewById(R.id.news_regular_content);
+            imageView = (ImageView) itemView.findViewById(R.id.news_regular_image);
 
             itemView.setOnClickListener(this);
         }
@@ -55,7 +57,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         @Override
         public void onClick(View v) {
             Post p = postList.get(NewsFragment.rv.indexOfChild(v));
-            Fragment frag = NewsDetails.newInstance(titleText.getText().toString(), contentText.getText().toString());
+            Fragment frag = NewsDetails.newInstance(Post.encode(p));
             FragmentManager manager = ((AppCompatActivity) v.getContext()).getSupportFragmentManager();
             manager.beginTransaction()
                     .hide(manager.findFragmentByTag(MainActivity.TAGFRAGMENT))
@@ -80,6 +82,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.titleText.setText(p.title);
         String content = p.content;
         holder.contentText.setText(Html.fromHtml(content));
+        holder.imageView.setImageBitmap(StorageManager.loadImageFromStorage(p.image, context));
     }
 
     @Override

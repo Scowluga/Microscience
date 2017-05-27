@@ -55,15 +55,20 @@ public class FirstRun extends AppCompatActivity {
         DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(FirstRun.this, true, fetchURL, new DataFetchAsyncTask.AsyncResponse(){
             @Override
             public void processFinish(String output){
-                List<Post> temp = parseNews(output, NewsProvider.getPosts(getApplicationContext()));
+                List<Post> posts = NewsProvider.getPosts(getApplicationContext());
+                List<Post> temp = parseNews(output, posts, getApplicationContext());
                 if (temp.size() > 0) {
-                    NewsProvider.rewriteContacts(getApplicationContext(), temp);
-                    if (first) {
-                        // Set 'first' as false so the setup doesn't happen every time
-                        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                .putBoolean("isFirst", false).apply();
+                    if (temp == posts) { // same
+                        // Do nothing. No new data
+                    } else { // DIFFERENT
+                        NewsProvider.rewriteContacts(getApplicationContext(), temp);
+                        if (first) {
+                            // Set 'first' as false so the setup doesn't happen every time
+                            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                    .putBoolean("isFirst", false).apply();
+                        }
+                        beginMain();
                     }
-                    beginMain();
                 } else { // empty list
                     if (first) {
                         displayError("Error", "Please connect to Wifi for first run.");

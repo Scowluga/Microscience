@@ -37,15 +37,18 @@ public class Post {
     // STATIC FUNCTIONALITY
   
     public static String encode (Post p) {
-        String ret = "";
-        ret += p.title + SMALL_DELIM
-                + p.content;
+        String ret = p.id + SMALL_DELIM
+                + p.title + SMALL_DELIM
+                + p.content + SMALL_DELIM
+                + p.date + SMALL_DELIM
+                + p.link + SMALL_DELIM
+                + p.image;
         return ret;
     }
 
     public static Post decode (String s) {
         List<String> characters = new ArrayList<>(Arrays.asList(s.split(SMALL_DELIM)));
-        Post p = new Post(characters.get(0), characters.get(1));
+        Post p = new Post(characters.get(0), characters.get(1), characters.get(2), characters.get(3), characters.get(4), characters.get(5));
         return p;
     }
 
@@ -74,11 +77,15 @@ public class Post {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (obj instanceof Post) {
+            Post p = (Post)obj;
+            return p.id == this.id;
+        }
+        return false;
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return this.id + " " + this.title;
     }
 }

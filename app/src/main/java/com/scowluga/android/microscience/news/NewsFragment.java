@@ -3,6 +3,8 @@ package com.scowluga.android.microscience.news;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,8 +24,18 @@ import com.scowluga.android.microscience.R;
 import com.scowluga.android.microscience.wordpress.DataFetchAsyncTask;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +100,7 @@ public class NewsFragment extends Fragment {
             DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(activity, isRunning, fetchURL, new DataFetchAsyncTask.AsyncResponse(){
                 @Override
                 public void processFinish(String output){
-                    List<Post> temp = parseNews(output, postList);
+                    List<Post> temp = parseNews(output, postList, context);
 
                     if (temp.size() > 0) {
                         if (temp == postList) { // same
@@ -127,18 +139,19 @@ public class NewsFragment extends Fragment {
             }, 1, TimeUnit.SECONDS);
         }
     }
-    String x = "featured_image2433";
 
-    public static List<Post> parseNews(String output, List<Post> posts) {
+    private static final String MEDIA_URL = "https://microscience.on.ca/wp-json/wp/v2/media/";
+
+    public static List<Post> parseNews(String output, List<Post> posts, Context context) {
         List<Post> info = new ArrayList<>();
 
         SimpleDateFormat inFmt = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat outFmt = new SimpleDateFormat("MMM dd, yyyy");
 
-        try{
+        try {
             JSONArray jsonArray = new JSONArray(output);
 
-            for(int i = 0; i < jsonArray.length(); i++) {
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject childObj = jsonArray.getJSONObject(i);
                 String id = childObj.getString("id");
                 String title = new JSONObject(childObj.getString("title")).getString("rendered");
@@ -147,22 +160,61 @@ public class NewsFragment extends Fragment {
                 String link = childObj.getString("link").replace("\\/", "/");
 
                 if (posts.contains(new Post(id))) {
-                    info.add(new Post(id, title, content, date, link, "featured_image" + id));
+                    info.add(new Post(id, title, content, date, link, "featured_image" + id + "?fields=guid"));
                 } else { // It's new!
                     String name = "featured_image" + id;
                     // SAVE INTO INTERNAL
 
-                    info.add(new Post(id, title, content, date, link, name));
+                    // get image -> save
 
+                    URL url = new URL(MEDIA_URL + id);
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    String res = result.toString();
+
+                    JSONObject imageObj = new JSONObject(res);
+                    String imageLink = new JSONObject(imageObj.getString("guid")).getString("rendered").replace("\\/", "/");
+                    Bitmap b = getBitmapFromURL(imageLink);
+
+                    StorageManager.saveToInternalStorage(b, name, context);
+
+                    info.add(new Post(id, title, content, date, link, name));
                 }
             }
-        } catch(Exception e){
-            Log.i ("App", "Error parsing data" + e.getMessage());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         return info;
     }
 
-    @Override
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
+    }
+
+        @Override
     public void onResume() {
         MainActivity.toolbar.setTitle("News");
         MainActivity.action_refresh.setVisible(true);
