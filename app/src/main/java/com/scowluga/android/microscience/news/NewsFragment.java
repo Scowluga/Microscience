@@ -107,17 +107,7 @@ public class NewsFragment extends Fragment {
                             // nothing
                             break;
                         case DataFetchAsyncTask.KEY_NEW:
-                            List<Post> temp = NewsProvider.getPosts(context);
-                            if (isRunning) { // RESETTING ADAPTER + notifyDataSetChanged();
-                                if (adapter == null) {
-                                    adapter = new NewsAdapter(temp, context);
-                                } else {
-                                    adapter.postList = temp;
-                                    adapter.notifyDataSetChanged();
-                                }
-                            } else { // not running
-                                // Do nothing.
-                            }
+                            NewsReset(context);
                             break;
                         case DataFetchAsyncTask.KEY_SAME:
                             // do nothing
@@ -134,6 +124,20 @@ public class NewsFragment extends Fragment {
                     sl.setRefreshing(false);
                 }
             }, 1000);
+        }
+    }
+
+    public static void NewsReset(Context context) {
+        List<Post> temp = NewsProvider.getPosts(context);
+        if (isRunning) { // RESETTING ADAPTER + notifyDataSetChanged();
+            if (adapter == null) {
+                adapter = new NewsAdapter(temp, context);
+            } else {
+                adapter.postList = temp;
+                adapter.notifyDataSetChanged();
+            }
+        } else { // not running
+            // Do nothing.
         }
     }
 

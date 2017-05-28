@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.scowluga.android.microscience.news.NewsFragment;
 import com.scowluga.android.microscience.news.NewsProvider;
 import com.scowluga.android.microscience.wordpress.DataFetchAsyncTask;
 
@@ -23,7 +24,6 @@ import static com.scowluga.android.microscience.news.NewsFragment.fetchURL;
 
 public class FirstRun extends AppCompatActivity {
     public static boolean first;
-    public static final boolean LOAD_FIRST = true; // CHANGE TO TRUE?
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,20 +33,17 @@ public class FirstRun extends AppCompatActivity {
         // If this is the first run, then 'first' will not exist. Therefore defaulted to true
         first = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirst", true);
-        if (first) {
-            File f = new File(getFilesDir(), MainActivity.NEWS_FILENAME);
-        }
 
-        if (wifiOn(getApplicationContext())) { // WIFI
-            if (LOAD_FIRST) {
+        if (first) {
+            if (wifiOn(getApplicationContext())) { // first + wifi --> init
+                File f = new File(getFilesDir(), MainActivity.NEWS_FILENAME);
                 runSetUp();
-            } else {
-                beginMain();
-            }
-        } else { // No Wifi
-            if (first) {
-                // Display + Finish;
+            } else { // first + no wifi --> error
                 displayError("Error", "Problem loading resources. Please confirm Wifi connection.");
+            }
+        } else { // not first
+            if (wifiOn(getApplicationContext())) {
+                runSetUp();
             } else {
                 beginMain();
             }
@@ -54,15 +51,13 @@ public class FirstRun extends AppCompatActivity {
     }
 
     private void runSetUp() {
-        DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(NewsProvider.getPosts(getApplicationContext()), FirstRun.this, true, fetchURL, new DataFetchAsyncTask.AsyncResponse(){
+        DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(NewsProvider.getPosts(getApplicationContext()), FirstRun.this, first, fetchURL, new DataFetchAsyncTask.AsyncResponse(){
             @Override
             public void processFinish(Integer output){
                 switch (output) {
                     case DataFetchAsyncTask.KEY_EMPTY:
                         if (first) {
                             displayError("Error", "Problem loading resources. Please confirm Wifi connection.");
-                        } else {
-                            beginMain();
                         }
                         break;
                     case DataFetchAsyncTask.KEY_NEW:
@@ -70,20 +65,24 @@ public class FirstRun extends AppCompatActivity {
                             first = false;
                             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                     .putBoolean("isFirst", false).apply();
+                            beginMain();
                         }
-                        beginMain();
+                        NewsFragment.NewsReset(getApplicationContext());
                         break;
                     case DataFetchAsyncTask.KEY_SAME:
                         if (first) { // Set 'first' as false so the setup doesn't happen every time
                             first = false;
                             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                     .putBoolean("isFirst", false).apply();
+                            beginMain();
                         }
-                        beginMain();
                         break;
                 }
             }
         }).execute();
+        if (!first) {
+            beginMain();
+        }
     }
 
     private void displayError(String title, String message) { // Quits application. Cannot load data

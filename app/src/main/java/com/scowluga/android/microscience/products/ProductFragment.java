@@ -28,7 +28,7 @@ public class ProductFragment extends Fragment {
         return fragment;
     }
 
-    public static final String FIRST_URL = "https://microscience.on.ca/products/";
+    public static final String FIRST_URL = "https://microscience.on.ca/products/product-category/";
     public static RecyclerView rv;
     public static ProductAdapter adapter;
 
