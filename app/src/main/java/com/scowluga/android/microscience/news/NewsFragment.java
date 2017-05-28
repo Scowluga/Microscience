@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.scowluga.android.microscience.FirstRun;
@@ -47,7 +50,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFragment extends Fragment {
+public class NewsFragment extends Fragment implements NewsAdapter.NewsOnClickListener {
 
     public NewsFragment() {
         // Required empty public constructor
@@ -88,7 +91,7 @@ public class NewsFragment extends Fragment {
         postList = NewsProvider.getPosts(getContext());
 
         rv = (RecyclerView) v.findViewById(R.id.news_recycler);
-        adapter = new NewsAdapter(postList, getContext());
+        adapter = new NewsAdapter(postList, getContext(), this);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -127,11 +130,26 @@ public class NewsFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onNewsItemClick(int pos, Post post, ImageView shareImageView, TextView title, TextView date, TextView content) { // THE CLICK
+        Post p = postList.get(pos);
+        Fragment frag = NewsDetails.newInstance(Post.encode(p));
+        FragmentManager manager = ((AppCompatActivity)getContext()).getSupportFragmentManager();
+        manager.beginTransaction()
+                .addSharedElement(shareImageView, p.id + "icon")
+                .addSharedElement(title, p.id + "title")
+                .addSharedElement(date, p.id + "date")
+                .addSharedElement(content, p.id + "content")
+                .addToBackStack(MainActivity.TAGFRAGMENT)
+                .replace(R.id.frag_layout, frag, MainActivity.TAGFRAGMENT)
+                .commit();
+    }
+
     public static void NewsReset(Context context) {
         List<Post> temp = NewsProvider.getPosts(context);
         if (isRunning) { // RESETTING ADAPTER + notifyDataSetChanged();
             if (adapter == null) {
-                adapter = new NewsAdapter(temp, context);
+                // it should never be
             } else {
                 adapter.postList = temp;
                 adapter.notifyDataSetChanged();
