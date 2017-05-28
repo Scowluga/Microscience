@@ -23,7 +23,7 @@ import java.util.List;
 public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHolder> {
 
     List<Point> pointList;
-    Context context;
+    static Context context;
 
     public TrainingAdapter (List<Point> points, Context c) {
         this.pointList = points;
@@ -54,12 +54,13 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
+            ImageView drop = (ImageView)v.findViewById(R.id.training_drop);
             LinearLayout l = (LinearLayout) v.findViewById(R.id.training_hidden);
             if (l.getVisibility() == View.GONE) {
-//                l.setVisibility(View.VISIBLE);
                 expand(l);
+                drop.setImageDrawable(context.getResources().getDrawable(R.drawable.drop_up));
             } else if (l.getVisibility() == View.VISIBLE) {
-//                l.setVisibility(View.GONE);
+                drop.setImageDrawable(context.getResources().getDrawable(R.drawable.drop_down));
                 collapse(l);
             }
         }

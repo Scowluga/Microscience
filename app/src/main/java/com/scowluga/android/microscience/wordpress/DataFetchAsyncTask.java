@@ -6,14 +6,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.scowluga.android.microscience.news.NewsProvider;
 import com.scowluga.android.microscience.news.Post;
 import com.scowluga.android.microscience.news.StorageManager;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -22,9 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +66,7 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
     @Override
     protected void onPreExecute() {
         if (this.showProgress) {
-            progressDialog.setMessage("Connecting to Database...");
+            progressDialog.setMessage("Loading Resources...");
             progressDialog.show();
         }
     }
@@ -78,7 +74,7 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
     @Override
     protected Integer doInBackground(String... args) {
         StringBuilder result = new StringBuilder();
-        int key;
+        int key = KEY_ERROR;
         try {
             URL url = new URL(PARSE_URL);
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -93,14 +89,13 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
 
             List<Post> temp = parseJSON(result.toString(), posts, this.activity.getApplicationContext());
             key = checkNew(posts, temp);
-            return key;
         }catch( Exception e) {
             e.printStackTrace();
         }
         finally {
             urlConnection.disconnect();
         }
-        return KEY_ERROR;
+        return key;
     }
 
     @Override
@@ -117,6 +112,7 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
 
     public static List<Post> parseJSON(String output, List<Post> posts, Context context) {
         List<Post> info = new ArrayList<>();
+        String newPictures = "";
 
         SimpleDateFormat inFmt = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat outFmt = new SimpleDateFormat("MMM dd, yyyy");
@@ -142,29 +138,39 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
                     } else { // HAS AN IMAGE
                         // READING IN
                         String name = "featured_image" + id;
-                        URL url = new URL(MEDIA_URL + id + "?fields=guid");
-                        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-                        StringBuilder result = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            result.append(line);
-                        }
-                        String res = result.toString();
-
-                        // GETTING NEW URL
-                        JSONArray array = new JSONArray(res);
-                        JSONObject imageObj = array.getJSONObject(0);
-                        String imageLink = new JSONObject(imageObj.getString("guid")).getString("rendered").replace("\\/", "/");
-                        Bitmap b = getBitmapFromURL(imageLink); // GETTING BITMAP
-
-                        StorageManager.saveToInternalStorage(b, name, context); // saving
-
-                        info.add(new Post(id, title, content, date, link, name));
+                        Post tempo = new Post(id, title, content, date, link, name);
+                        info.add(tempo);
+                        newPictures += id + ",";
                     }
+                }
+            }
+            if (newPictures.length() > 0) {
+                String mediaUrl = MEDIA_URL + newPictures;
+                mediaUrl = mediaUrl.substring(0, mediaUrl.length() - 1); // delete last comma
+
+                URL url = new URL(mediaUrl + "&fields=post,source_url");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+                StringBuilder result = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+                String res = result.toString();
+
+                // GETTING NEW URL
+                JSONArray array = new JSONArray(res);
+                for (int i = 0; i < array.length(); i ++) {
+                    JSONObject imageObj = array.getJSONObject(i);
+                    String imageLink = imageObj.getString("source_url").replace("\\/", "/");
+                    Bitmap b = getBitmapFromURL(imageLink); // GETTING BITMAP
+
+                    String parentId = imageObj.getString("post");
+                    String name = "featured_image" + parentId;
+                    StorageManager.saveToInternalStorage(b, name, context); // saving
                 }
             }
         } catch (Exception e) {

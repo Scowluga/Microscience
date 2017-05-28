@@ -25,12 +25,18 @@
     </item>
 
 
-    <item android:title="Service">
+    <item android:title="Products">
         <menu>
+
+            <item
+                android:id="@+id/nav_featured"
+                android:icon="@drawable/nav_featured"
+                android:title="Featured"
+                />
             <item
                 android:id="@+id/nav_products"
                 android:icon="@drawable/nav_products"
-                android:title="Products"
+                android:title="Categories"
                 />
 
             <item

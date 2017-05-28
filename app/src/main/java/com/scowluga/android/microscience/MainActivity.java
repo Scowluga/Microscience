@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_refresh) {
             Fragment f = getSupportFragmentManager().findFragmentByTag(TAGFRAGMENT);
             if (f instanceof NewsFragment) { // IF NEWS FRAGMENT IS RUNNING ON UPDATE
-                ((NewsFragment) f).refreshStorage(getApplicationContext(), this);
+                NewsFragment.refreshStorage(getApplicationContext(), this);
             }
             return true;
         }
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity
 
             } else {
                 launchQR();
-            };
+            }
         } else if (id == R.id.nav_contact) {
             Fragment frag = ContactFragment.newInstance();
             getSupportFragmentManager().beginTransaction()

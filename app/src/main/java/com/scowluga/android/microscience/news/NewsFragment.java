@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -95,6 +96,7 @@ public class NewsFragment extends Fragment {
     }
 
     public static void refreshStorage(final Context context, final Activity activity) {
+        sl.setRefreshing(true);
         if (FirstRun.wifiOn(context)) {
             // Getting Data
             DataFetchAsyncTask asyncTask = (DataFetchAsyncTask) new DataFetchAsyncTask(postList, activity, isRunning, fetchURL, new DataFetchAsyncTask.AsyncResponse() {
@@ -125,14 +127,13 @@ public class NewsFragment extends Fragment {
                 }
             }).execute();
         } else {
-            sl.setRefreshing(true);
-            final ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
-            exec.schedule(new Runnable(){
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
                 @Override
-                public void run(){
+                public void run() {
                     sl.setRefreshing(false);
                 }
-            }, 1, TimeUnit.SECONDS);
+            }, 1000);
         }
     }
 

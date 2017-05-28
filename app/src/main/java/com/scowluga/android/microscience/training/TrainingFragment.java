@@ -58,8 +58,7 @@ public class TrainingFragment extends Fragment {
         recyclerView = (RecyclerView)v.findViewById(R.id.training_recycler);
         trainer = new TrainingAdapter(points, getContext());
         recyclerView.setAdapter(trainer);
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(llm);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return v;
     }

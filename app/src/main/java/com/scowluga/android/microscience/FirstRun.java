@@ -41,7 +41,7 @@ public class FirstRun extends AppCompatActivity {
         } else { // No Wifi
             if (first) {
                 // Display + Finish;
-                displayError("Error", "Please connect to Wifi for first run.");
+                displayError("Error", "Problem loading resources. Please confirm Wifi connection.");
             } else {
                 beginMain();
             }
@@ -55,7 +55,7 @@ public class FirstRun extends AppCompatActivity {
                 switch (output) {
                     case DataFetchAsyncTask.KEY_EMPTY:
                         if (first) {
-                            displayError("Error", "Please connect to Wifi for first run.");
+                            displayError("Error", "Problem loading resources. Please confirm Wifi connection.");
                         } else {
                             beginMain();
                         }
@@ -86,7 +86,7 @@ public class FirstRun extends AppCompatActivity {
         alertDialog.setTitle(title);
         alertDialog.setIcon(R.drawable.icon_exclamation);
         alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         finish();

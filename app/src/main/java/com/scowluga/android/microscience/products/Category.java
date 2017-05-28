@@ -31,12 +31,14 @@ public class Category {
 
     public static List<Category> getCategories() {
         return new ArrayList<>(Arrays.asList(
+                new Category(true, false),
                 new Category("Autism and AAC", "autism-aac", R.drawable.icon_puzzle),
                 new Category("Blind Access", "blind-access", R.drawable.icon_blind_access),
                 new Category("Learning Differences", "learning-differences", R.drawable.icon_library_book),
                 new Category("Low Vision", "low-vision", R.drawable.icon_low_vision),
                 new Category("Produits Francophones", "produits-francophones", R.drawable.icon_language),
-                new Category("Voice Recognition", "voice-recognition", R.drawable.icon_voice)
+                new Category("Voice Recognition", "voice-recognition", R.drawable.icon_voice),
+                new Category(false, true)
         ));
     }
 }

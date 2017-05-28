@@ -14,12 +14,12 @@ public class Post {
 
     public static final String NO_IMAGE = "no_image";
 
-    String id;
-    String title;
-    String content;
-    String date;
-    String link;
-    String image;
+    public String id; // ID OF THE POST, USED TO STORE IMAGE. NOT ID OF FEATURED_MEDIA
+    public String title;
+    public String content;
+    public String date;
+    public String link;
+    public String image;
 
     // CONSTRUCTORS
 
