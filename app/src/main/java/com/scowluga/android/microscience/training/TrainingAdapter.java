@@ -7,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.scowluga.android.microscience.MainActivity;
 import com.scowluga.android.microscience.R;
 
 import java.util.List;
@@ -75,16 +73,16 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
         View rowView;
         switch (viewType) {
             case VIEW_TYPES.Normal:
-                rowView = inflater.inflate(R.layout.fragment4_training_row, parent, false);
+                rowView = inflater.inflate(R.layout.fragment6_training_row, parent, false);
                 return new ViewHolder (rowView, true);
             case VIEW_TYPES.Header:
-                rowView = inflater.inflate(R.layout.fragment4_training_row_header, parent, false);
+                rowView = inflater.inflate(R.layout.fragment6_training_row_header, parent, false);
                 return new ViewHolder (rowView, false);
             case VIEW_TYPES.Footer:
-                rowView = inflater.inflate(R.layout.fragment4_training_row_footer, parent, false);
+                rowView = inflater.inflate(R.layout.fragment6_training_row_footer, parent, false);
                 return new ViewHolder (rowView, false);
             default:
-                rowView = inflater.inflate(R.layout.fragment4_training_row, parent, false);
+                rowView = inflater.inflate(R.layout.fragment6_training_row, parent, false);
                 return new ViewHolder (rowView, true);
         }
     }

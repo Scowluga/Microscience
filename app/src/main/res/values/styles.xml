@@ -36,7 +36,7 @@
     <!-- FOR FRAGMENTS LAYOUTS -->
 
     <dimen name="marginOut">
-        12dp
+        8dp
     </dimen>
 
     <style name="LayoutMargins">

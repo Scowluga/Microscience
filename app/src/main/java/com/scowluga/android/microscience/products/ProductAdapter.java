@@ -15,9 +15,6 @@ import android.widget.TextView;
 
 
 import com.scowluga.android.microscience.R;
-import com.scowluga.android.microscience.training.TrainingAdapter;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -45,16 +42,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         View rowView;
         switch (viewType) {
             case ProductAdapter.VIEW_TYPES.Normal:
-                rowView = inflater.inflate(R.layout.fragment3_product_row, parent, false);
+                rowView = inflater.inflate(R.layout.fragment5_product_row, parent, false);
                 return new ProductAdapter.ViewHolder(rowView, viewType);
             case ProductAdapter.VIEW_TYPES.Header:
-                rowView = inflater.inflate(R.layout.fragment3_product_row_header, parent, false);
+                rowView = inflater.inflate(R.layout.fragment5_product_row_header, parent, false);
                 return new ProductAdapter.ViewHolder(rowView, viewType);
             case ProductAdapter.VIEW_TYPES.Footer:
-                rowView = inflater.inflate(R.layout.fragment3_product_row_footer, parent, false);
+                rowView = inflater.inflate(R.layout.fragment5_product_row_footer, parent, false);
                 return new ProductAdapter.ViewHolder(rowView, viewType);
             default:
-                rowView = inflater.inflate(R.layout.fragment3_product_row, parent, false);
+                rowView = inflater.inflate(R.layout.fragment5_product_row, parent, false);
                 return new ProductAdapter.ViewHolder(rowView, viewType);
         }
     }

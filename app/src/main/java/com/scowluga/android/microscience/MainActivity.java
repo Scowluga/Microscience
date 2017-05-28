@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.scowluga.android.microscience.about.AboutFragment;
 import com.scowluga.android.microscience.contact.ContactFragment;
+import com.scowluga.android.microscience.featured.FeaturedFragment;
 import com.scowluga.android.microscience.home.HomeFragment;
 import com.scowluga.android.microscience.news.NewsFragment;
 import com.scowluga.android.microscience.products.ProductFragment;
@@ -136,6 +137,12 @@ public class MainActivity extends AppCompatActivity
                     .commit();
         } else if (id == R.id.nav_news) {
             Fragment frag = NewsFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frag_layout, frag, TAGFRAGMENT)
+                    .addToBackStack(TAGFRAGMENT)
+                    .commit();
+        } else if (id == R.id.nav_featured) {
+            Fragment frag = FeaturedFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frag_layout, frag, TAGFRAGMENT)
                     .addToBackStack(TAGFRAGMENT)

@@ -39,7 +39,7 @@ public class ContactFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment6_contact, container, false);
+        View v = inflater.inflate(R.layout.fragment8_contact, container, false);
 
         // --------------------- CONTACT ------------------------
         Button phone_toll = (Button)v.findViewById(R.id.contact_phone_tollfree);

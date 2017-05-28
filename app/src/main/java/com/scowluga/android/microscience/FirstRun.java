@@ -23,6 +23,7 @@ import static com.scowluga.android.microscience.news.NewsFragment.fetchURL;
 
 public class FirstRun extends AppCompatActivity {
     public static boolean first;
+    public static final boolean LOAD_FIRST = true; // CHANGE TO TRUE?
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,11 @@ public class FirstRun extends AppCompatActivity {
         }
 
         if (wifiOn(getApplicationContext())) { // WIFI
-            runSetUp();
+            if (LOAD_FIRST) {
+                runSetUp();
+            } else {
+                beginMain();
+            }
         } else { // No Wifi
             if (first) {
                 // Display + Finish;
