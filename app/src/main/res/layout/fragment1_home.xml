@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:radius="4dp"
-               android:padding="10dp"
+                android:padding="10dp"
                 app:fillColor="@color/colorAccent"
                 app:pageColor="@color/background"
                 app:strokeColor="@color/colorAccent">

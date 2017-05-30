@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorAccent">#448AFF</color>
 
+    <color name="accent_blue">#448AFF</color>
+    <color name="accent_pink">#F50057</color>
+    <color name="accent_cyan">#00E5FF</color>
 
     <color name="gray_dark">#d3d3d3</color>
     <item name="gray" type="color">#E0E0E0</item>

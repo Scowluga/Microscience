@@ -19,7 +19,7 @@
             android:background="@color/colorPrimary"
             app:tabTextColor="@color/gray"
             app:tabSelectedTextColor="@color/white"
-            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorColor="@color/accent_cyan"
             app:tabMode="fixed"
             app:tabGravity="fill"/>
 

@@ -49,13 +49,25 @@
                     android:layout_height="wrap_content"
                     android:text="Students can access content and common literacy supports from any device or computer with internet access, then dive deeper with comprehensive literacy support installed directly to Mac and Windows computers. Access content on the web, your computer, or in print. Available for a single user, on a network or via web access."
                     style="@style/small_margin_text"/>
-                <Button
-                    android:id="@+id/kurzweil_launch"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Learn more"
-                    android:drawableLeft="@drawable/left_website"
-                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/kurzweil_launch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Learn more"
+                        android:drawableLeft="@drawable/left_website"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact us"
+                        android:onClick="contactLaunch"
+                        android:drawableLeft="@drawable/left_contact"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

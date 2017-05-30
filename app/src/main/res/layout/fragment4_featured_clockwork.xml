@@ -42,13 +42,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/small_margin_text"/>
-                <Button
-                    android:id="@+id/clockwork_launch"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Learn more"
-                    android:drawableLeft="@drawable/left_website"
-                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/clockwork_launch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Learn more"
+                        android:drawableLeft="@drawable/left_website"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact us"
+                        android:onClick="contactLaunch"
+                        android:drawableLeft="@drawable/left_contact"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
