@@ -53,11 +53,14 @@ public class MainActivity extends AppCompatActivity
         setup();
 
         // INITIALIZE HOME
-        Fragment frag = HomeFragment.newInstance();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frag_layout, frag, TAGFRAGMENT)
-                .addToBackStack(TAGFRAGMENT)
-                .commit();
+        if (FirstRun.open) {
+            Fragment frag = HomeFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frag_layout, frag, TAGFRAGMENT)
+                    .addToBackStack(TAGFRAGMENT)
+                    .commit();
+            FirstRun.open = false;
+        }
     }
 
     public void setup() {

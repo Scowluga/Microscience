@@ -24,11 +24,13 @@ import static com.scowluga.android.microscience.news.NewsFragment.fetchURL;
 
 public class FirstRun extends AppCompatActivity {
     public static boolean first;
+    public static boolean open;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_run);
+        open = true;
 
         // If this is the first run, then 'first' will not exist. Therefore defaulted to true
         first = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
