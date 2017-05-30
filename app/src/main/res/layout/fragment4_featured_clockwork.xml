@@ -31,6 +31,7 @@
                 android:text="ClockWork Enterprise is an integrated management tool designed for University and College Counseling, Disability and Student Health Service departments. Clockwork’s calendar system combines a sophisticated and flexible student data management system to provide integrated management tools for counseling departments. Researched, designed and used by universities and colleges, ClockWork assists staff with their day-to-day workload emphasizing ease of use, security, confidentiality, reporting, in a highly customizable environment."
                 style="@style/infoText"/>
             <Button
+                android:id="@+id/clockwork_launch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Learn more"

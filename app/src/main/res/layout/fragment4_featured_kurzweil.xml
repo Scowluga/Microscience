@@ -32,6 +32,7 @@
                 android:text="K3000+firefly is educational technology that brings all pieces of the literacy puzzle together with one easy, proven solution to ensure instruction and learning become personal — and meaningful progress becomes possible."
                 style="@style/infoText"/>
             <Button
+                android:id="@+id/kurzweil_launch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Learn more"
