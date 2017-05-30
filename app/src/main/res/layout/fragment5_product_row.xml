@@ -40,8 +40,7 @@
             <TextView
                 android:id="@+id/product_title"
                 android:text="Training in the Workforce "
-                style="@style/largeText"
-                android:textStyle="bold"
+                style="@style/titleText"
                 android:gravity="left|center_vertical"
                 android:layout_height="60dp"
                 android:layout_width="0dp"

@@ -4,40 +4,60 @@
     android:layout_height="match_parent"
     tools:context="com.scowluga.android.microscience.featured.FeaturedKurzweil">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/featured_kurzweil"/>
-
+        android:layout_height="match_parent">
         <LinearLayout
-            android:layout_margin="@dimen/marginOut"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kurzweil 3000 Web + Firefly"
-                style="@style/mediumText"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="K3000+firefly is educational technology that brings all pieces of the literacy puzzle together with one easy, proven solution to ensure instruction and learning become personal — and meaningful progress becomes possible."
-                style="@style/infoText"/>
-            <Button
-                android:id="@+id/kurzweil_launch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Learn more"
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/featured_kurzweil"/>
+
+            <LinearLayout
+                android:layout_margin="@dimen/marginOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="What is Kurzweil 3000 Web + Firefly?"
+                    style="@style/titleText" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="With a combination of access and support, learners can make real academic progress."
+                    style="@style/small_margin_text"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="K3000 + firefly is educational technology that brings all pieces of the literacy puzzle together with one easy, proven solution to ensure instruction and learning become personal — and meaningful progress becomes possible."
+                    style="@style/small_margin_text"/>
+
+                <TextView
+                    android:text="How Does It Work?"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/titleText"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Students can access content and common literacy supports from any device or computer with internet access, then dive deeper with comprehensive literacy support installed directly to Mac and Windows computers. Access content on the web, your computer, or in print. Available for a single user, on a network or via web access."
+                    style="@style/small_margin_text"/>
+                <Button
+                    android:id="@+id/kurzweil_launch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Learn more"
+                    android:drawableLeft="@drawable/left_website"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </FrameLayout>

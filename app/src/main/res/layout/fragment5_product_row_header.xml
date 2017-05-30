@@ -5,8 +5,16 @@
     >
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Products by Category"
+        style="@style/titleText"
+        android:layout_marginTop="@dimen/marginOut"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"/>
+    <TextView
         android:text="Here at the MSC, we offer the full range of assistive products. See our primary categories below, and click to learn more: "
-        style="@style/mediumText"
+        style="@style/infoText"
         android:layout_marginTop="@dimen/marginOut"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"

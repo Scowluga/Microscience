@@ -7,7 +7,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +21,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.scowluga.android.microscience.MainActivity;
 import com.scowluga.android.microscience.R;
 
 /**
@@ -77,6 +85,7 @@ public class NewsDetails extends Fragment {
 
         TextView contentTv = (TextView) view.findViewById(R.id.news_detail_content);
         contentTv.setText(Html.fromHtml(post.content));
+        contentTv.setMovementMethod(LinkMovementMethod.getInstance());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             contentTv.setTransitionName(post.id + "content");
         }
@@ -103,5 +112,34 @@ public class NewsDetails extends Fragment {
         });
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        ActionBar tb = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
+        // Display as false
+        tb.setDisplayHomeAsUpEnabled(false);
+        tb.setDisplayShowHomeEnabled(false);
+
+        // RESETTING THE TOOLBAR
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                getActivity(), MainActivity.drawer, MainActivity.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        MainActivity.drawer.setDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ActionBar tb = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        tb.setDisplayHomeAsUpEnabled(true);
+        tb.setDisplayShowHomeEnabled(true); 
+        MainActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go back
+                ((AppCompatActivity)getActivity()).getSupportFragmentManager().popBackStackImmediate();
+            }
+        });
+    }
 }

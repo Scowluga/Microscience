@@ -119,6 +119,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        Toast.makeText(this, "Hi", Toast.LENGTH_SHORT).show();
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();

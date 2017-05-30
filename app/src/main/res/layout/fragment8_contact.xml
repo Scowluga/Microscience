@@ -68,8 +68,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/mediumText"
-                            android:textStyle="bold"
+                            style="@style/titleText"
                             android:text="Contact By Phone"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -148,8 +147,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/mediumText"
-                            android:textStyle="bold"
+                            style="@style/titleText"
                             android:text="Contact By Email"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -225,8 +223,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/mediumText"
-                            android:textStyle="bold"
+                            style="@style/titleText"
                             android:text="We're located at..."/>
 
                         <Button

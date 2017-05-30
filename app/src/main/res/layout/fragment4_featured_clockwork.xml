@@ -4,40 +4,52 @@
     android:layout_height="match_parent"
     tools:context="com.scowluga.android.microscience.featured.FeaturedClockwork">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/featured_clockwork"/>
-
+        android:layout_height="match_parent">
         <LinearLayout
-            android:layout_margin="@dimen/marginOut"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Clockwork"
-                style="@style/mediumText"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ClockWork Enterprise is an integrated management tool designed for University and College Counseling, Disability and Student Health Service departments. Clockwork’s calendar system combines a sophisticated and flexible student data management system to provide integrated management tools for counseling departments. Researched, designed and used by universities and colleges, ClockWork assists staff with their day-to-day workload emphasizing ease of use, security, confidentiality, reporting, in a highly customizable environment."
-                style="@style/infoText"/>
-            <Button
-                android:id="@+id/clockwork_launch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Learn more"
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
+                android:adjustViewBounds="true"
+                android:src="@drawable/featured_clockwork"/>
 
-
+            <LinearLayout
+                android:layout_margin="@dimen/marginOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="What is Clockwork?"
+                    style="@style/titleText" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ClockWork Enterprise is an integrated management tool designed for University and College Counseling, Disability and Student Health Service departments. Clockwork’s calendar system combines a sophisticated and flexible student data management system to provide integrated management tools for counseling departments. Researched, designed and used by universities and colleges, ClockWork assists staff with their day-to-day workload emphasizing ease of use, security, confidentiality, reporting, in a highly customizable environment."
+                    style="@style/small_margin_text"/>
+                <TextView
+                    android:text="Visit our Website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/titleText"/>
+                <TextView
+                    android:text="Visit our website online to learn about test and exam booking, accommodation letters, service providers, and much more! "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/small_margin_text"/>
+                <Button
+                    android:id="@+id/clockwork_launch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Learn more"
+                    android:drawableLeft="@drawable/left_website"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </FrameLayout>

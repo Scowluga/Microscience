@@ -45,13 +45,16 @@
                     android:text="Who Are We?"
                     style="@style/titleText"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Since 1980, MSC has been dedicated to enhancing the lives of Special Needs clients. Our firm has introduced many innovative applications into Canada, including Kurzweil 3000 and Dragon Naturally Speaking among others, and has pioneered the use of these packages in the classroom. "
+                    style="@style/small_margin_text"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Since 1980, MSC has been dedicated to enhancing the lives of Special Needs clients. Our firm has introduced many innovative applications into Canada, including Kurzweil 3000 and Dragon Naturally Speaking among others, and has pioneered the use of these packages in the classroom. We are the only firm in southern Ontario that provides assistive technology solutions for the full range of disability profiles. Whether it be a visual impairment or physical challenge, or a learning or intellectual challenge, we can provide the means necessary to accommodate students, and facilitate their learning. We believe in providing our clients with the best solutions, the best support, at affordable prices."
+                    android:text="We are the only firm in southern Ontario that provides assistive technology solutions for the full range of disability profiles. Whether it be a visual impairment or physical challenge, or a learning or intellectual challenge, we can provide the means necessary to accommodate students, and facilitate their learning. We believe in providing our clients with the best solutions, the best support, at affordable prices."
                     style="@style/small_margin_text"/>
 
                 <include

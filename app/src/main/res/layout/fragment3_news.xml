@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:descendantFocusability="blocksDescendants"
         android:clickable="false"
-        android:focusable="false"
-        >
+        android:focusable="false">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/news_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/gray_light"
             android:clickable="true"
             android:focusable="true">
         </android.support.v7.widget.RecyclerView>

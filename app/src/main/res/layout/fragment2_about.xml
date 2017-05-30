@@ -31,13 +31,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/mediumText"
+                    style="@style/small_margin_text"
                     android:text="Serving the Canadian Special Needs Community since 1980, providing Adaptive technology, Consulting, Training, Service and Support."/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/headerText"
+                    style="@style/titleText"
                     android:text="Who Are We?"
                     />
 
@@ -57,7 +57,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/headerText"
+                    style="@style/titleText"
                     android:text="What Do We Do?"/>
 
                 <TextView

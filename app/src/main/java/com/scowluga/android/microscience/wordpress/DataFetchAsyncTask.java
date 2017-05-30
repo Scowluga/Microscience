@@ -124,7 +124,7 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
                 JSONObject childObj = jsonArray.getJSONObject(i);
                 String id = childObj.getString("id");
                 String title = new JSONObject(childObj.getString("title")).getString("rendered");
-                String content = (new JSONObject(childObj.getString("content")).getString("rendered")).replace("\\/", "/");
+                String content = (new JSONObject(childObj.getString("content")).getString("rendered")).replace("\\/", "/").trim();
                 String date = outFmt.format(inFmt.parse(childObj.getString("date").substring(0, 11)));
                 String link = childObj.getString("link").replace("\\/", "/");
 

@@ -39,7 +39,7 @@ public class FeaturedClockwork extends Fragment {
         View v = inflater.inflate(R.layout.fragment4_featured_clockwork, container, false);
 
 
-        Button launch = (Button)v.findViewById(R.id.kurzweil_launch);
+        Button launch = (Button)v.findViewById(R.id.clockwork_launch);
         launch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
