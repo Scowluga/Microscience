@@ -1,12 +1,16 @@
 package com.scowluga.android.microscience.nav3_news;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +28,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     Context context;
 
     final NewsOnClickListener newsOnClickListener;
+    private int lastPosition = -1;
 
     public NewsAdapter (List<Post> posts, Context c, NewsOnClickListener onClickListener) {
         this.postList = posts;
@@ -44,6 +49,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         public TextView contentText;
         public ImageView imageView;
 
+        public FrameLayout frameLayout;
+
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
@@ -55,6 +62,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             dateText = (TextView) itemView.findViewById(R.id.news_regular_date);
             contentText = (TextView) itemView.findViewById(R.id.news_regular_content);
             imageView = (ImageView) itemView.findViewById(R.id.news_regular_image);
+
+            frameLayout = (FrameLayout) itemView.findViewById(R.id.frag_layout);
         }
     }
 
@@ -92,6 +101,25 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 }
             });
         }
+
+        if (NewsFragment.isAnim) {setAnimation(holder.itemView, position);};
+    }
+
+    private void setAnimation(final View itemView, final int position) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_bottom_top);
+            itemView.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(ViewHolder holder) {
+        ((ViewHolder)holder).itemView.clearAnimation();
+        super.onViewDetachedFromWindow(holder);
+
     }
 
     @Override

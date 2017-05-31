@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.scowluga.android.microscience.FirstRun;
 import com.scowluga.android.microscience.MainActivity;
@@ -50,6 +52,15 @@ public class NewsFragment extends Fragment implements NewsAdapter.NewsOnClickLis
 
     public static SwipeRefreshLayout sl;
 
+    public static boolean isAnim = true;
+    public static boolean openDetail = false;
+    
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        postponeEnterTransition();
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,6 +83,7 @@ public class NewsFragment extends Fragment implements NewsAdapter.NewsOnClickLis
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        startPostponedEnterTransition();
         return v;
     }
 
@@ -120,6 +132,9 @@ public class NewsFragment extends Fragment implements NewsAdapter.NewsOnClickLis
                 .addToBackStack(MainActivity.TAGFRAGMENT)
                 .replace(R.id.frag_layout, frag, MainActivity.TAGFRAGMENT)
                 .commit();
+
+        isAnim = false;
+        openDetail = true;
     }
 
     public static void NewsReset(Context context) {
@@ -138,6 +153,7 @@ public class NewsFragment extends Fragment implements NewsAdapter.NewsOnClickLis
 
     @Override
     public void onResume() {
+        openDetail = false;
         MainActivity.toolbar.setTitle("News");
         MainActivity.action_refresh.setVisible(true);
         isRunning = true;
@@ -146,6 +162,11 @@ public class NewsFragment extends Fragment implements NewsAdapter.NewsOnClickLis
 
     @Override
     public void onPause() {
+        if (openDetail) {
+
+        } else {
+            isAnim = true;
+        }
         MainActivity.action_refresh.setVisible(false);
         isRunning = false;
         super.onPause();
