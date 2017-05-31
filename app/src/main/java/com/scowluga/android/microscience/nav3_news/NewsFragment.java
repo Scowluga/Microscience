@@ -124,15 +124,24 @@ public class NewsFragment extends Fragment implements NewsAdapter.NewsOnClickLis
         Post p = postList.get(pos);
         Fragment frag = NewsDetails.newInstance(Post.encode(p));
         FragmentManager manager = ((AppCompatActivity)getContext()).getSupportFragmentManager();
-        manager.beginTransaction()
-                .addSharedElement(shareImageView, p.id + "icon")
-                .addSharedElement(title, p.id + "title")
-                .addSharedElement(date, p.id + "date")
-                .addSharedElement(content, p.id + "content")
-                .addToBackStack(MainActivity.TAGFRAGMENT)
-                .replace(R.id.frag_layout, frag, MainActivity.TAGFRAGMENT)
-                .commit();
-
+        if (p.image.equals(Post.NO_IMAGE)) {
+            manager.beginTransaction()
+                    .addSharedElement(title, p.id + "title")
+                    .addSharedElement(date, p.id + "date")
+                    .addSharedElement(content, p.id + "content")
+                    .addToBackStack(MainActivity.TAGFRAGMENT)
+                    .replace(R.id.frag_layout, frag, MainActivity.TAGFRAGMENT)
+                    .commit();
+        } else {
+            manager.beginTransaction()
+                    .addSharedElement(shareImageView, p.id + "icon")
+                    .addSharedElement(title, p.id + "title")
+                    .addSharedElement(date, p.id + "date")
+                    .addSharedElement(content, p.id + "content")
+                    .addToBackStack(MainActivity.TAGFRAGMENT)
+                    .replace(R.id.frag_layout, frag, MainActivity.TAGFRAGMENT)
+                    .commit();
+        }
         isAnim = false;
         openDetail = true;
     }

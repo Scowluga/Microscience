@@ -51,6 +51,8 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
     private List<Post> posts;
     private Activity activity;
 
+    private static boolean isNew = false;
+
     public DataFetchAsyncTask(List<Post> info, Activity a, boolean show, String url, AsyncResponse delegate){
         this.posts = info;
         this.PARSE_URL = url;
@@ -131,6 +133,9 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
                 if (posts.contains(new Post(id))) { // if it already exists, skip
                     info.add(new Post(id, title, content, date, link, "featured_image" + id));
                 } else { // It's new!
+
+                    isNew = true;
+
                     String featured = childObj.getString("featured_media");
                     boolean noImage = featured.equals("0");
                     if (noImage) { // doesn't have an image, set tag
@@ -182,11 +187,11 @@ public class DataFetchAsyncTask extends AsyncTask<String, Void, Integer> {
     private Integer checkNew(List<Post> posts, List<Post> temp) {
         if (temp.size() == 0) {
             return KEY_EMPTY;
-        } else if (posts.size() == temp.size()){
-            return KEY_SAME;
+        } else if (isNew || posts.size() != temp.size()){
+            NewsProvider.rewriteContacts(activity.getApplicationContext(), temp);
+            return KEY_NEW;
         }
-        NewsProvider.rewriteContacts(activity.getApplicationContext(), temp);
-        return KEY_NEW;
+        return KEY_SAME;
     }
 
     public static Bitmap getBitmapFromURL(String src) throws IOException {

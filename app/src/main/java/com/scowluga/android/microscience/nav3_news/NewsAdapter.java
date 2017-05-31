@@ -94,20 +94,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         } else {
             holder.imageView.setImageBitmap(StorageManager.loadImageFromStorage(p.image, context));
             ViewCompat.setTransitionName(holder.imageView, p.id + "icon");
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    newsOnClickListener.onNewsItemClick(holder.getAdapterPosition(), p, holder.imageView, holder.titleText, holder.dateText, holder.contentText);
-                }
-            });
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newsOnClickListener.onNewsItemClick(holder.getAdapterPosition(), p, holder.imageView, holder.titleText, holder.dateText, holder.contentText);
+            }
+        });
 
         if (NewsFragment.isAnim) {setAnimation(holder.itemView, position);};
     }
 
     private void setAnimation(final View itemView, final int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
-
         if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_bottom_top);
             itemView.startAnimation(animation);

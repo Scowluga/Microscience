@@ -81,7 +81,12 @@ public class Post {
     public boolean equals(Object obj) {
         if (obj instanceof Post) {
             Post p = (Post)obj;
-            return p.id.equals(this.id);
+            return p.id.equals(this.id)
+                    && p.title.equals(this.title)
+                    && p.content.equals(this.content)
+                    && p.date.equals(this.date)
+                    && p.link.equals(this.link)
+                    && p.image.equals(this.image);
         }
         return false;
     }
