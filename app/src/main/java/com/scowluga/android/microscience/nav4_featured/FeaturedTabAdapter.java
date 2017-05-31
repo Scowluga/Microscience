@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.featured;
+package com.scowluga.android.microscience.nav4_featured;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

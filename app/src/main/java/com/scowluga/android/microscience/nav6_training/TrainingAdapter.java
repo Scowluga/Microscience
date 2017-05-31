@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.training;
+package com.scowluga.android.microscience.nav6_training;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

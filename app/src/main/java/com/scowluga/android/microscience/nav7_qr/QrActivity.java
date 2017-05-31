@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.qr;
+package com.scowluga.android.microscience.nav7_qr;
 
 import android.content.DialogInterface;
 import android.content.Intent;

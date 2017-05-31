@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.products;
+package com.scowluga.android.microscience.nav5_categories;
 
 import com.scowluga.android.microscience.R;
 

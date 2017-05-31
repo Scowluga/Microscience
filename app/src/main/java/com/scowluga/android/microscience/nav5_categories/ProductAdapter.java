@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.products;
+package com.scowluga.android.microscience.nav5_categories;
 
 import android.content.Context;
 import android.content.Intent;

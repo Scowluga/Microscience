@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.news;
+package com.scowluga.android.microscience.nav3_news;
 
 import java.util.ArrayList;
 import java.util.Arrays;

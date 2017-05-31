@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.home;
+package com.scowluga.android.microscience.nav1_home;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;

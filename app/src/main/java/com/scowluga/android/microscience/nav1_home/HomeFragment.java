@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.home;
+package com.scowluga.android.microscience.nav1_home;
 
 
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.scowluga.android.microscience.MainActivity;
 import com.scowluga.android.microscience.R;

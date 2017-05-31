@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.training;
+package com.scowluga.android.microscience.nav6_training;
 
 import com.scowluga.android.microscience.R;
 

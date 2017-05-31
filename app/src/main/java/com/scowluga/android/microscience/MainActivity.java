@@ -22,14 +22,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.scowluga.android.microscience.about.AboutFragment;
-import com.scowluga.android.microscience.contact.ContactFragment;
-import com.scowluga.android.microscience.featured.FeaturedFragment;
-import com.scowluga.android.microscience.home.HomeFragment;
-import com.scowluga.android.microscience.news.NewsFragment;
-import com.scowluga.android.microscience.products.ProductFragment;
-import com.scowluga.android.microscience.qr.QrActivity;
-import com.scowluga.android.microscience.training.TrainingFragment;
+import com.scowluga.android.microscience.nav2_about.AboutFragment;
+import com.scowluga.android.microscience.nav8_contact.ContactFragment;
+import com.scowluga.android.microscience.nav4_featured.FeaturedFragment;
+import com.scowluga.android.microscience.nav1_home.HomeFragment;
+import com.scowluga.android.microscience.nav3_news.NewsFragment;
+import com.scowluga.android.microscience.nav5_categories.ProductFragment;
+import com.scowluga.android.microscience.nav7_qr.QrActivity;
+import com.scowluga.android.microscience.nav6_training.TrainingFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

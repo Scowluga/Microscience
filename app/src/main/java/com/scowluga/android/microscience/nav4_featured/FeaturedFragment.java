@@ -1,22 +1,18 @@
-package com.scowluga.android.microscience.featured;
+package com.scowluga.android.microscience.nav4_featured;
 
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.scowluga.android.microscience.MainActivity;
 import com.scowluga.android.microscience.R;
-
-import static com.scowluga.android.microscience.MainActivity.TAGFRAGMENT;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -22,7 +22,7 @@
                 />
             </intent-filter>
         </activity>
-        <activity android:name=".qr.QrActivity" />
+        <activity android:name=".nav7_qr.QrActivity" />
         <activity android:name=".FirstRun">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

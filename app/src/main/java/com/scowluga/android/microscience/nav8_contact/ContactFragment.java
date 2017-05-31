@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.contact;
+package com.scowluga.android.microscience.nav8_contact;
 
 
 import android.content.Context;

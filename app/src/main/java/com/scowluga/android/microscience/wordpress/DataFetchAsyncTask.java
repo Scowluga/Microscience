@@ -7,9 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
-import com.scowluga.android.microscience.news.NewsProvider;
-import com.scowluga.android.microscience.news.Post;
-import com.scowluga.android.microscience.news.StorageManager;
+import com.scowluga.android.microscience.nav3_news.NewsProvider;
+import com.scowluga.android.microscience.nav3_news.Post;
+import com.scowluga.android.microscience.nav3_news.StorageManager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

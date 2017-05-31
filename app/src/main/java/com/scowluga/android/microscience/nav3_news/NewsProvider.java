@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.news;
+package com.scowluga.android.microscience.nav3_news;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -12,7 +12,6 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static android.content.Context.MODE_APPEND;

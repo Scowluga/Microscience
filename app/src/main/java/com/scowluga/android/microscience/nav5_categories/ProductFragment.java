@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.training;
+package com.scowluga.android.microscience.nav5_categories;
 
 
 import android.os.Bundle;
@@ -17,48 +17,43 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TrainingFragment extends Fragment {
-
-    public TrainingFragment() {
+public class ProductFragment extends Fragment {
+    public ProductFragment() {
         // Required empty public constructor
     }
-
-    public static TrainingFragment newInstance() {
-
+    public static ProductFragment newInstance() {
         Bundle args = new Bundle();
-
-        TrainingFragment fragment = new TrainingFragment();
+        ProductFragment fragment = new ProductFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    List<Point> points;
-    public static RecyclerView recyclerView;
-    public static TrainingAdapter trainer;
+    public static final String FIRST_URL = "https://microscience.on.ca/products/product-category/";
+    public static RecyclerView rv;
+    public static ProductAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment6_training, container, false);
+        View v = inflater.inflate(R.layout.fragment5_product, container, false);
 
         if (container == null) {
             return null;
         }
 
-        points = Point.initialize();
-
-        recyclerView = (RecyclerView)v.findViewById(R.id.training_recycler);
-        trainer = new TrainingAdapter(points, getContext());
-        recyclerView.setAdapter(trainer);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        List<Category> categories = Category.getCategories();
+        rv = (RecyclerView)v.findViewById(R.id.product_rv);
+        adapter = new ProductAdapter(categories, getContext());
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return v;
     }
 
     @Override
     public void onResume() {
-        MainActivity.toolbar.setTitle("Training");
+        MainActivity.toolbar.setTitle("Products");
         super.onResume();
     }
 }

@@ -1,26 +1,21 @@
 package com.scowluga.android.microscience;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.scowluga.android.microscience.news.NewsFragment;
-import com.scowluga.android.microscience.news.NewsProvider;
+import com.scowluga.android.microscience.nav3_news.NewsFragment;
+import com.scowluga.android.microscience.nav3_news.NewsProvider;
 import com.scowluga.android.microscience.wordpress.DataFetchAsyncTask;
 
 import java.io.File;
 
-import static com.scowluga.android.microscience.news.NewsFragment.fetchURL;
+import static com.scowluga.android.microscience.nav3_news.NewsFragment.fetchURL;
 
 public class FirstRun extends AppCompatActivity {
     public static boolean first;

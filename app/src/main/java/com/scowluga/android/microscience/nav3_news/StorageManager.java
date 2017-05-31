@@ -1,4 +1,4 @@
-package com.scowluga.android.microscience.news;
+package com.scowluga.android.microscience.nav3_news;
 
 import android.content.Context;
 import android.content.ContextWrapper;
