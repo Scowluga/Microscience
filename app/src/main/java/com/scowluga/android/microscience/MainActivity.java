@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frag_layout, frag, TAGFRAGMENT)
-                    .addToBackStack(TAGFRAGMENT)
                     .commit();
             FirstRun.open = false;
         }
