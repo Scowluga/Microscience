@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity
         // INITIALIZE HOME
         if (FirstRun.open) {
             Fragment frag = HomeFragment.newInstance();
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frag_layout, frag, TAGFRAGMENT)
                     .addToBackStack(TAGFRAGMENT)
@@ -119,13 +121,6 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        Toast.makeText(this, "Hi", Toast.LENGTH_SHORT).show();
-        onBackPressed();
-        return true;
     }
 
     @Override
@@ -258,5 +253,4 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(MainActivity.this, QrActivity.class);
         startActivity(intent);
     }
-
 }
