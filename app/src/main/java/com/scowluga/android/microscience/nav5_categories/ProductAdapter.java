@@ -5,11 +5,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,18 +75,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     itemView.setOnClickListener(this);
                     break;
                 case VIEW_TYPES.Footer:
-                    Button b = (Button)itemView.findViewById(R.id.product_search);
-                    final EditText et = (EditText)itemView.findViewById(R.id.product_query);
-                    b.setOnClickListener(new View.OnClickListener() {
+                    final AutoCompleteTextView et = (AutoCompleteTextView) itemView.findViewById(R.id.product_query);
+
+                    String[] autoComplete = context.getResources().getStringArray(R.array.products_search_queries);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, autoComplete);
+                    et.setAdapter(adapter);
+
+                    et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                         @Override
-                        public void onClick(View v) {
-                            if (TextUtils.isEmpty(et.getText())) {
-                                et.setError("Empty Search");
-                            } else {
-                                String url = "https://microscience.on.ca/?s=" + et.getText() + "&post_type=product";
-                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                                context.startActivity(intent);
+                        public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                            boolean handled = false;
+                            if (i == EditorInfo.IME_ACTION_SEARCH) {
+                                handled = true;
+                                if (TextUtils.isEmpty(et.getText())) {
+                                    et.setError("Empty Search");
+                                } else {
+                                    String url = "https://microscience.on.ca/?s=" + et.getText() + "&post_type=product";
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                    context.startActivity(intent);
+                                }
                             }
+                            return handled;
                         }
                     });
             }

@@ -6,6 +6,138 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="products_search_queries">
+        <item>Ablenet LITTLE Step-by-Step</item>
+        <item>Ablenet LITTLE Step-by-Step with Levels Communicator</item>
+        <item>Ablenet Powerlink 4 - Control Unit</item>
+        <item>Ablenet Big Red Twist</item>
+        <item>Keys-U-See Large Print Keyboard - Black Text on Yellow Keys</item>
+        <item>"Keys-U-See Large Print Keyboard, White-on-Black"</item>
+        <item>Ablenet Specs Switch Black</item>
+        <item>Ablenet Specs Switch Blue</item>
+        <item>Ablenet Specs Switch Green</item>
+        <item>Ablenet Specs Switch Red</item>
+        <item>Ablenet Specs Switch Yellow</item>
+        <item>Ablenet Micro Light Switch</item>
+        <item>Adesso EasyTouch 132 - Luminous 4X Large Print Multimedia Desktop Keyboard</item>
+        <item>Activity Trainer</item>
+        <item>Power Pack (DTT &amp; AT)</item>
+        <item>DT Trainer</item>
+        <item>ZoomText Magnifier</item>
+        <item>ZoomText Magnifier USB</item>
+        <item>ZoomText Magnifier International</item>
+        <item>ZoomText Magnifier International USB</item>
+        <item>ZoomText Magnifier/Reader</item>
+        <item>ZoomText Magnifier/Reader USB</item>
+        <item>ZoomTextMagnifier/Reader International</item>
+        <item>ZoomText Magnifier/Reader International USB</item>
+        <item>ZoomText Mac</item>
+        <item>ZoomText Magnifier Non-Enterprise 5 User</item>
+        <item>ZoomText Large-Print Keyboard</item>
+        <item>ZoomText Fusion</item>
+        <item>Alva BC 640 Braille Display USB and Bluetooth</item>
+        <item>Alva BC640 Comfort Braille Display</item>
+        <item>Alva 640 Braille Display - USB Only</item>
+        <item>AMDI iAdapter 5 Case</item>
+        <item>AMDI iAdapter Mini Case</item>
+        <item>AMDI iAdapter Mini Standard Bundle with Bluetooth Switch Access</item>
+        <item>Andrea Anti-Noise PC Noise-Cancelling Headset</item>
+        <item>Attainment GoTalk</item>
+        <item>Attainment GoTalk Overlay Software</item>
+        <item>Attainment Life Skills Academics</item>
+        <item>Attainment Talking Photo Album</item>
+        <item>BrowseAloud</item>
+        <item>Claro Cloud</item>
+        <item>ClaroRead For Mac</item>
+        <item>ClaroRead For Windows</item>
+        <item>CrickSoft Clicker 6</item>
+        <item>Duxbury Braille Translator</item>
+        <item>Duxbury Braille Translator SMA</item>
+        <item>Mobilux Digital Touch HD</item>
+        <item>Visolux Digital HD</item>
+        <item>JAWS</item>
+        <item>Ruby Handheld Video Magnifier</item>
+        <item>Window-Eyes</item>
+        <item>"Lexibar for Windows, Bilingual, License for Single Computer Only - DVD"</item>
+        <item>BrailleNote Apex BT 18 Braille Keyboard</item>
+        <item>BrailleNote Apex BT 32 Braille Keyboard</item>
+        <item>Brailliant Display 80 cells with no input 2 year warranty</item>
+        <item>Brailliant 32 Cell Braille Display - 2 year warranty</item>
+        <item>Brailliant 40 Cell Braille Display - 2 year warranty</item>
+        <item>Juliet 120 Braille Embosser</item>
+        <item>Mountbatten Learning System - Music/Nemeth - includes 2 year warranty</item>
+        <item>Mountbatten Whisperer Writer - Includes 1 year warranty</item>
+        <item>Mountbatten Whisperer Learning System - Music/Nemeth - 2yr warranty</item>
+        <item>Mountbatten Writer - includes 2 year warranty</item>
+        <item>Phoenix - single sided and Braille graphics embosser</item>
+        <item>Romeo 60 Braille Embosser</item>
+        <item>Victor Reader Stream New Generation (English)</item>
+        <item>Victor Reader Stream New Generation (French)</item>
+        <item>BrailleNote Touch</item>
+        <item>"BrailleNote Touch 32 French</item>
+        <item>BrailleNote Touch 32 French"</item>
+        <item>BrailleNote Touch 18 French</item>
+        <item>Prodigi Tablet Kit (English)</item>
+        <item>Prodigi Tablet Kit  (French)</item>
+        <item>Prodigi Connect 12 with Distance Viewing</item>
+        <item>Prodigi Connect 12 English</item>
+        <item>Prodigi Connect 12 avec cam�ra de vue � distance</item>
+        <item>Prodigi Connect 12 agrandisseur num�rique</item>
+        <item>Buzzclip</item>
+        <item>Orbitrack</item>
+        <item>n-ABLER Pro Rollerball/Joystick</item>
+        <item>Simply Works it-Send Pro</item>
+        <item>Simply Works it-Roll Trackball</item>
+        <item>Simply Works it-Stick Joystick</item>
+        <item>Simply Works it-Receive</item>
+        <item>Simply Works Wireless it-Switch</item>
+        <item>iZoom</item>
+        <item>ReadDesk</item>
+        <item>InSync Buddy Gooseneck Microphone USB 7G</item>
+        <item>Kurzweil 3000 Windows/Mac Web Version 15 - New License - Per Year</item>
+        <item>Kurzweil 1000</item>
+        <item>Kurzweil 3000</item>
+        <item>Kurzweil 3000 Windows Network Version 15</item>
+        <item>Eyegaze Edge Pack</item>
+        <item>Livescribe 3D Recording Earbuds</item>
+        <item>"Livescribe Single Subject Notebook, 4-Pack"</item>
+        <item>Livescribe 3 Subject Notebook</item>
+        <item>Livescribe A5 Single Subject Notebook</item>
+        <item>Livescribe 2GB Echo Smartpen</item>
+        <item>Livescribe 3 Smartpen</item>
+        <item>Livescribe 3 Pro Smartpen</item>
+        <item>Livescribe Echo Ink Cartridge Refills</item>
+        <item>Livescribe Smartpen Ink Cartridge Refills</item>
+        <item>Spokeman Voice Amplifier</item>
+        <item>SoniVox Plus Voice Amplifier</item>
+        <item>MagniLink S</item>
+        <item>Magnilink Vision TTS Desktop CCTV</item>
+        <item>Magnilink Zip</item>
+        <item>MathMagic</item>
+        <item>"Dragon Legal Individual 15, English"</item>
+        <item>Dragon Medical Practice</item>
+        <item>Dragon Professional Individual</item>
+        <item>Dragon Professional Individual For Mac</item>
+        <item>Optelec ClearNote+</item>
+        <item>Optelec Compact 5 HD</item>
+        <item>Optelec Compact 7 HD</item>
+        <item>Optelec ClearReader+ Basic</item>
+        <item>Optelec ClearView C Color HD System</item>
+        <item>Optelec Traveller HD</item>
+        <item>"Orcam MyEye - OCR, Face, Products, Money"</item>
+        <item>Origin Keystrokes 4.1</item>
+        <item>Origin HeadMouse Nano</item>
+        <item>Origin Tapio Switch Interface</item>
+        <item>Origin Tapio and Orby Bundle</item>
+        <item>BrailleCoach Plus Braille Label Maker</item>
+        <item>Braille Label Maker</item>
+        <item>ProxTalker Package</item>
+        <item>Kurzweil 1000 French</item>
+        <item>Kurzweil 3000 Professional French Standalone</item>
+        <item>SciPlus Large Print Scientific Calculators</item>
+        <item>Super Cardoid Mic Me 3</item>
+        <item>Read &amp; Write Gold</item>
+        <item>Clockwork</item>
+        <item>0</item>
+    </string-array>
 </resources>

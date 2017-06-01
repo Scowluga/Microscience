@@ -2,38 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    android:padding="8dp"
+    android:id="@+id/product_footer">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="rtl"
-            android:layout_marginBottom="8dp">
-                <Button
-                    android:id="@+id/product_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Search"
-                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_gravity="center_vertical"/>
-                <EditText
-                    android:id="@+id/product_query"
-                    android:hint=" Or click here to search online"
-                    android:textSize="16dp"
-                    android:inputType="text"
-                    style="@style/titleText"
-                    android:gravity="left|center_vertical"
-                    android:layout_height="60dp"
-                    android:layout_width="match_parent"
-                    android:drawableLeft="@drawable/left_send"
-                    />
-        </LinearLayout>
-    </LinearLayout>
+    <AutoCompleteTextView
+        android:id="@+id/product_query"
+        android:hint=" Or click here to search online"
+        android:textSize="16dp"
+        android:inputType="textCapSentences|textAutoCorrect"
+        android:imeOptions="actionSearch"
+        android:gravity="left"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:drawableLeft="@drawable/left_search"/>
 
     <include
         layout="@layout/fragment0_contact_footer"/>
