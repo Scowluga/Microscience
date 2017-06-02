@@ -1,8 +1,10 @@
 package com.scowluga.android.microscience;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -236,10 +238,25 @@ public class MainActivity extends AppCompatActivity
             case QrActivity.MY_PERMISSIONS_REQUEST_CAMERA:
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    launchQR();
-
+                    final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                    alertDialog.setTitle("Privacy Policy");
+                    alertDialog.setMessage("Would you like to view the privacy policy of Microscience?");
+                    alertDialog.setCancelable(false);
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(""));
+                                    startActivity(intent);
+                                }
+                            });
+                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            alertDialog.dismiss();
+                            launchQR();
+                        }
+                    });
+                    alertDialog.show();
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
