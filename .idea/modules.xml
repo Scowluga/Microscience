@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Microscience.iml" filepath="$PROJECT_DIR$/Microscience.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Microscience.iml" filepath="$PROJECT_DIR$/Microscience.iml" />
       <module fileurl="file://$PROJECT_DIR$/Microscience_code.iml" filepath="$PROJECT_DIR$/Microscience_code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

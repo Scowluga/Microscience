@@ -22,13 +22,17 @@
                 />
             </intent-filter>
         </activity>
-        <activity android:name=".nav7_qr.QrActivity" />
         <activity android:name=".FirstRun">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".nav7_qr.QrReader"
+            android:label="@string/title_activity_qr_reader"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

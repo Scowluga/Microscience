@@ -26,12 +26,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.scowluga.android.microscience.nav2_about.AboutFragment;
+import com.scowluga.android.microscience.nav7_qr.QrReader;
 import com.scowluga.android.microscience.nav8_contact.ContactFragment;
 import com.scowluga.android.microscience.nav4_featured.FeaturedFragment;
 import com.scowluga.android.microscience.nav1_home.HomeFragment;
 import com.scowluga.android.microscience.nav3_news.NewsFragment;
 import com.scowluga.android.microscience.nav5_categories.ProductFragment;
-import com.scowluga.android.microscience.nav7_qr.QrActivity;
 import com.scowluga.android.microscience.nav6_training.TrainingFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity
                     != PackageManager.PERMISSION_GRANTED) { // NOT GRANTED
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.CAMERA},
-                        QrActivity.MY_PERMISSIONS_REQUEST_CAMERA);
+                        MY_PERMISSIONS_REQUEST_CAMERA);
 
             } else {
                 launchQR();
@@ -231,11 +231,13 @@ public class MainActivity extends AppCompatActivity
     // ------------------ QR CODE SCANNER FUNCTIONS -------------------------
     // ----------------------------------------------------------------------
 
+    public static final String PRIVACY_URL = "https://microscience.on.ca/privacy-policy/";
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case QrActivity.MY_PERMISSIONS_REQUEST_CAMERA:
+            case MY_PERMISSIONS_REQUEST_CAMERA:
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -245,7 +247,7 @@ public class MainActivity extends AppCompatActivity
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://microscience.on.ca/privacy-policy/"));
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_URL));
                                     startActivity(intent);
                                 }
                             });
@@ -266,7 +268,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void launchQR() {
-        Intent intent = new Intent(MainActivity.this, QrActivity.class);
+        Intent intent = new Intent(MainActivity.this, QrReader.class);
         startActivity(intent);
     }
 }

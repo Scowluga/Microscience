@@ -140,4 +140,5 @@
         <item>Clockwork</item>
         <item>0</item>
     </string-array>
+    <string name="title_activity_qr_reader">QrReader</string>
 </resources>
