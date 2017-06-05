@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(""));
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://microscience.on.ca/privacy-policy/"));
                                     startActivity(intent);
                                 }
                             });
