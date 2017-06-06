@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.scowluga.android.microscience.nav8_contact.ContactFragment"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.scowluga.android.microscience.nav8_contact.ContactFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                     <android.support.v7.widget.CardView
                         android:layout_width="@dimen/design_size"
                         android:layout_height="@dimen/design_size"
-                        android:backgroundTint="@color/black"
+                        app:cardBackgroundColor="@color/black"
                         android:layout_marginRight="@dimen/design_margin_right">
 
 
@@ -119,7 +119,7 @@
                     <android.support.v7.widget.CardView
                         android:layout_width="@dimen/design_size"
                         android:layout_height="@dimen/design_size"
-                        android:backgroundTint="@color/black"
+                        app:cardBackgroundColor="@color/black"
                         android:layout_marginRight="@dimen/design_margin_right">
 
 
@@ -196,7 +196,7 @@
                     <android.support.v7.widget.CardView
                         android:layout_width="@dimen/design_size"
                         android:layout_height="@dimen/design_size"
-                        android:backgroundTint="@color/black"
+                        app:cardBackgroundColor="@color/black"
                         android:layout_marginRight="@dimen/design_margin_right">
 
                         <RelativeLayout
