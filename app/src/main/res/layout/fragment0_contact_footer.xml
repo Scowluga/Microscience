@@ -41,7 +41,6 @@
         app:justifyContent="center"
         app:flexDirection="row"
         app:flexWrap="wrap"
-        android:layout_gravity="center"
         >
 
         <Button
