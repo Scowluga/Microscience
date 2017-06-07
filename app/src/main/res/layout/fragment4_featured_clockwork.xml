@@ -57,7 +57,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Contact us"
+                        android:text="Contact"
                         android:onClick="contactLaunch"
                         android:drawableLeft="@drawable/left_contact"
                         style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
