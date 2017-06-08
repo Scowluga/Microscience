@@ -4,7 +4,12 @@ The official application of Microcomputer Science Centre Inc. Download <a href="
 ## About the Application 
 Created during my co-op term, the Microscience application provides various functionality to patrons, and promotes the centre through select featured products. See <a href="https://play.google.com/store/apps/details?id=com.scowluga.android.microscience&hl=en">The Google Play Store</a> for details, more information, and to download. 
 
-The application is created with Android Studio. Python was used to parse data and create the list of autocomplete names in the <i>Products</i> section, and the <i>News</i> section retrieves data from WordPress through the WordPress REST API and filter feeds plugins. 
+<p align="center">
+<img src="/screenshots/demo.gif"/>
+<i><strong><br>News Section Example</strong></i>
+</p>
+
+The application is created with Android Studio. Python was used to parse data and create the list of autocomplete names in the <i>Products</i> section, and the <i>News</i> section retrieves data from WordPress through the WordPress REST API and filter feeds plugins (see above for example). 
 
 ## Description 
 Since 1980, MSC has been dedicated to enhancing the lives of Special Needs clients all across North America. Our firm has introduced many innovative applications into Canada, including Kurzweil 3000 and Dragon Naturally Speaking among others, and has pioneered the use of these packages in the classroom. 
